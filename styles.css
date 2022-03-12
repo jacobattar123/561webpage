@@ -1,4 +1,95 @@
-.address{
-    font-family: Helvetica, sans-serif;
+#main-container {
+    width: 100%;
+    min-width: 100vw;
+    height: 100%;
+    display: block;
+}
+
+#navbar-container {
+    position: sticky;
+    width: 100vw;
+    height: 68.53px;
+    top: 0;
+    z-index: 5;
+}
+
+.nav {
+    margin-top: 15px;
+    background-color: #00a8f3;
+    border-style: solid;
+    border-color: #cdecef;
+    border-width: 3px 0px 0px 0px;
+    height: 59px;
+}
+
+a.nav-link {
+    position: relative;
+    color: white;
+    top: 0px;
+    padding: 16px;
+    background-color: #00a8f3;
+}
+
+a.nav-link-current {
+    position: relative;
+    top: 16px;
     color: #00a8f3;
+    padding: 18px;
+    background-color: #cdecef;
+}
+
+a.nav-link:hover {
+    position: relative;
+    color: #00a8f3;
+    padding: 16px;
+    background-color: #cdecef;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+a.nav-link-current:hover {
+    text-decoration: none;
+}
+
+#top_banner {
+    display: grid;
+}
+
+.carousel-container {
+    width: 100%;
+    height: 500px;
+    background-color: red;
+}
+
+#carousel_slides {}
+
+.carousel-inner {
+    height: 510px;
+}
+
+.carousel-item.active {
+    height: 500px!important;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%!important;
+}
+
+@media screen and (max-width: 1200px) {
+    .row #column-empty {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .row #column-email {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .row #column-phone {
+        display: none!important;
+    }
 }

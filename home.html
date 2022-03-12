@@ -2,168 +2,141 @@
 <html lang="en">
 
 <head>
- <!--- This is a comment to test--> 
-  <title>Generic Dentist Site</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="nav.css">
-  <link rel="stylesheet" href="styles.css">
+
+    <title>Generic Dentist Site</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+
+
+
+
 </head>
 
 <body>
 
-  <div class="container-fluid">
-    <nav id="navbar" styles="" class="navbar navbar-expand-sm navbar-light bg-white fixed-top shadow-sm">
-      <a class="navbar-brand" href="#">
-        <img id="logo" src="images\FamilyDentalCareLogo.png" class="header-default" alt="">
-      </a>
-      <div class="column">
-        <div>
-          <p></p>
-          <a
-            href="https://www.google.com/maps/place/Kaiser+Permanente+Bostonia+Medical+Offices/@32.802389,-116.9185462,15.5z/data=!4m5!3m4!1s0x80d9591c56e2b789:0x95958796179980b2!8m2!3d32.8087704!4d-116.9233309">
+    <div class="wrapper" id="main-container">
+        <div class="container" id="top-banner">
+            <div class="row">
+                <div class="col-auto">
+                    <br>
+                    <a href="./home.html">
+                        <img src="./images/FamilyDentalCareLogo.png" alt="Logo" width="75%" height="75%">
+                    </a>
+                </div>
 
-            <p class="address"><img src="images\pindrop.jpg"></img> &nbsp; 12304 High Hill Way El Cajon, CA 92021 &nbsp;</p>
-            <p></p>
+                <div class="col-auto-banner" id="column-empty">
+                    <!--empty column to push the other colums-->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+
+                <div class="col-auto-banner" id="column-email">
+                    <!--column for email icon and email address-->
+                    <br>
+                    <div class="item-container d-flex align-items-center justify-content-center">
+                        <div class="image-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" color="#00a8f3" width="60" height="60" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+              </svg>
+                        </div>
+                        <div class="content-container">
+                            <br>
+                            <h6 class="title" style="font-size: 17px;">&nbsp;&nbsp;Email</h6>
+                            <p class="description" style="font-size: 12px;">&nbsp;&nbsp;abc123@edu.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto-banner" id="column-phone">
+                    <!--column for call icon and phone number-->
+                    <br>
+                    <div class="item-container d-flex align-items-center justify-content-center">
+                        <div class="image-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" color="#00a8f3" fill="currentColor" class="bi bi-telephone" width="60" height="60" viewBox="0 0 16 16">
+                <path
+                  d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+              </svg>
+                        </div>
+                        <div class="content-container">
+                            <br>
+                            <h6 class="title" style="font-size: 17px;">&nbsp;&nbsp;Call Us</h6>
+                            <p class="description" style="font-size: 12px;">&nbsp;&nbsp;619-000-0000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <ul class="navbar-nav nav ml-auto ">
-          <li class="nav-item"><a class="nav-link px-3" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact Us</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="#services">Services</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="#education">Patient Education</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div> <!-- End of div for container fluid-->
+        <div id="navbar-container">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link-current" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Our Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Offers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Make An Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Insurrance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
 
-  <script>
-    // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
-    window.onscroll = function () { scrollFunction() };
-    function scrollFunction() {
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.body.style.marginTop = "80px";
-        document.getElementById("logo").className = "header-scrolled"
-      } else {
-        document.body.style.marginTop = "130px";
-        document.getElementById("logo").className = "header-default"
-      }
-    }
-  </script>
-  <!--Javascript to resize the navbard-->
-  <!--- End of nav   --->
-  <div style="">Lorem, ipsum dolor sit
-    amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi! amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi! amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!amet consectetur adipisicing elit. Eveniet cum amet consequatur eius
-    officiis similique dolorem veritatis mollitia, veniam eum voluptate Lorem
-    ipsum dolor sit amet consectetur, adipisicing elit. Odio dolore reiciendis
-    doloremque quos commodi mollitia porro veniam itaque laudantium corrupti
-    sunt molestiae incidunt libero, neque modi a cumque! Ut, sed. porro possimus
-    reiciendis aliquam distinctio enim dignissimos et expedita. Lorem ipsum dolor sit
-    amet consectetur adipisicing elit. Ex delectus aut consectetur non illum vero, inventore
-    exercitationem laudantium officiis soluta officia cumque, debitis quae iusto temporibus sunt
-    explicabo fugit excepturi!
-  </div>
+            </ul>
+        </div>
 
+
+        <div class="carousel-container">
+
+            <div id="carousel_slides" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="./images\woman_smile.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="./images\smiling_people.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="./images\girl_smiling_teeth.jpg" alt="Third slide">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div>
+
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut deserunt fuga ratione cupiditate reiciendis maiores porro obcaecati? Ratione quis natus nulla iure cupiditate, officiis, ducimus, iste maiores totam vel adipisci?;prelore, Lorem ipsum dolor
+                sit amet consectetur, adipisicing elit. Harum quibusdam iusto accusamus nulla ipsam pariatur eligendi omnis. Adipisci eos, voluptates similique inventore unde facilis ullam commodi suscipit delectus ratione illo. Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Ad repudiandae debitis ex sint iste exercitationem maiores dolorem culpa dicta odit. Tempora error adipisci veritatis ad, saepe modi excepturi consequatur rerum. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Itaque doloribus asperiores, libero nulla animi, ut corrupti voluptas fugiat a alias, ipsa iure minus quae ea quasi recusandae vitae. Quos, dolore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolores
+                architecto quasi cum minus. Iusto harum sequi eum ullam voluptatum, natus itaque facere rem fuga, dolor debitis dolores quisquam voluptate? Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe incidunt ut soluta obcaecati. Possimus
+                maiores magnam temporibus molestias ipsum aspernatur dicta, excepturi, quas placeat eligendi id est iusto vero. Dolores? Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, accusamus repellendus numquam sint officiis dicta laboriosam
+                similique officia, aliquam ducimus natus earum? Expedita nihil repellat animi at nobis. Labore, suscipit! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis sequi quod nihil modi nisi eum, quis laborum. Facilis ipsa numquam
+                deleniti, at repellat labore eos. Dolores et laudantium perferendis maxime! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odit dignissimos tempora velit similique, id alias! Atque nesciunt doloribus rem quae, ducimus
+                eaque dolorem cumque laudantium dolorum nemo possimus labore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium modi, repellat aliquid voluptatem exercitationem expedita amet corporis assumenda architecto omnis qui
+                ipsum minus ipsam quibusdam eos voluptatum provident atque deserunt.
+            </div>
+
+        </div>
 
 </body>
 
