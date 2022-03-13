@@ -61,13 +61,15 @@ a.nav-link-current:hover {
     background-color: red;
 }
 
-#carousel_slides {}
-
 .carousel-inner {
     height: 510px;
 }
 
 .carousel-item.active {
+    height: 500px!important;
+}
+
+.carousel-item {
     height: 500px!important;
 }
 
