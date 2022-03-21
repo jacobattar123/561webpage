@@ -1,97 +1,205 @@
-#main-container {
-    width: 100%;
-    min-width: 100vw;
-    height: 100%;
-    display: block;
-}
-
-#navbar-container {
-    position: sticky;
-    width: 100vw;
-    height: 68.53px;
-    top: 0;
-    z-index: 5;
-}
-
-.nav {
-    margin-top: 15px;
-    background-color: #00a8f3;
-    border-style: solid;
-    border-color: #cdecef;
-    border-width: 3px 0px 0px 0px;
-    height: 59px;
-}
-
-a.nav-link {
-    position: relative;
-    color: white;
-    top: 0px;
-    padding: 16px;
-    background-color: #00a8f3;
-}
-
-a.nav-link-current {
-    position: relative;
-    top: 16px;
-    color: #00a8f3;
-    padding: 18px;
-    background-color: #cdecef;
-}
-
-a.nav-link:hover {
-    position: relative;
-    color: #00a8f3;
-    padding: 16px;
-    background-color: #cdecef;
-    text-decoration: none;
-    transition: 0.5s;
-}
-
-a.nav-link-current:hover {
-    text-decoration: none;
-}
-
-#top_banner {
-    display: grid;
-}
-
-.carousel-container {
-    width: 100%;
-    height: 500px;
-    background-color: red;
-}
-
-.carousel-inner {
-    height: 510px;
-}
-
-.carousel-item.active {
-    height: 500px!important;
-}
-
-.carousel-item {
-    height: 500px!important;
-}
-
-.carousel-item img {
-    object-fit: cover;
-    height: 100%!important;
-}
-
-@media screen and (max-width: 1200px) {
-    .row #column-empty {
-        display: none!important;
+    #main-container {
+        width: 100%;
+        min-width: 100vw;
+        height: 100%;
+        display: block;
     }
-}
-
-@media screen and (max-width: 1200px) {
-    .row #column-email {
-        display: none!important;
+    /*Start style for top banner*/
+    
+    #top-banner {
+        display: grid;
+        width: fit-content;
+        margin-left: none;
     }
-}
-
-@media screen and (max-width: 1200px) {
-    .row #column-phone {
-        display: none!important;
+    /*Start Style for nav bar*/
+    
+    .topnav-container {
+        position: sticky;
+        background-color: #00a8f3;
+        top: 0px;
+        z-index: 30;
     }
-}
+    
+    .topnav {
+        top: 0;
+        overflow: hidden;
+        background-color: #00a8f3;
+        border-style: solid;
+        border-color: #cdecef;
+        border-width: 3px 0px 0px 0px;
+        margin-top: 15px;
+    }
+    
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+    
+    .topnav a:hover {
+        background-color: #cdecef;
+        color: #00a8f3;
+        transition: 0.3s;
+    }
+    
+    .topnav a.active {
+        background-color: #cdecef;
+        color: #00a8f3;
+    }
+    
+    .topnav .icon {
+        display: none;
+        margin-right: 15px;
+    }
+    /*Start Style for carousel*/
+    
+    .carousel-container {
+        width: 100%;
+        height: 500px;
+        background-color: red;
+    }
+    
+    .carousel-inner {
+        height: 510px;
+    }
+    
+    .carousel-item.active {
+        height: 500px!important;
+    }
+    
+    .carousel-item {
+        text-align: center;
+        height: 500px!important;
+    }
+    
+    .carousel-item img {
+        object-fit: cover;
+        height: 100%!important;
+    }
+    
+    .carousel-content {
+        left: 40%;
+        text-align: center;
+        position: absolute;
+        top: 30%;
+        z-index: 20;
+        color: white;
+        /*text-shadow: 0 1px 2px rgba(0, 0, 0, .6);*/
+    }
+    
+    .carousel-content a {
+        border-radius: 5px;
+        margin-top: 10px;
+        color: #cdecef;
+        border-style: solid;
+        border-color: #cdecef;
+        padding: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-width: 2px 2px 2px 2px;
+    }
+    
+    .carousel-content h2 {
+        color: #cdecef;
+        margin-bottom: 10px;
+    }
+    
+    .carousel-content h4 {
+        color: #cdecef;
+        margin-bottom: 40px;
+    }
+    
+    .carousel-content a:hover {
+        background-color: #cdecef;
+        color: #00a8f3;
+        transition: 0.5s;
+        text-decoration: none;
+    }
+    
+    .row h1 {
+        text-align: center;
+        margin-right: 180px;
+    }
+    /*
+    .tall-container {
+        margin-top: 50px;
+        background-color: rgb(236, 236, 236);
+        height: 600px;
+        width: 100%;
+        display: inline-block;
+    }
+    
+    #Meet-Dentist h2 {
+        position: relative;
+        top: 20px;
+        text-align: center;
+    }
+    
+    #Meet-Dentist img {
+        border-radius: 5px;
+        position: relative;
+        top: 75px;
+        left: 450px;
+        height: 400px;
+        width: 350px;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 5px #000000;
+        box-shadow: inset 0 0 3px #000000;
+    }
+    */
+    
+    #medium-text-container {
+        text-align: center;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 5px #000000;
+        box-shadow: inset 0 0 3px #000000;
+        border-radius: 5px;
+    }
+    
+    @media screen and (max-width: 1200px) {
+        .row #column-empty {
+            display: none!important;
+        }
+    }
+    
+    @media screen and (max-width: 1200px) {
+        .row #column-email {
+            display: none!important;
+        }
+    }
+    
+    @media screen and (max-width: 1200px) {
+        .row #column-phone {
+            display: none!important;
+        }
+    }
+    
+    @media screen and (max-width: 728px) {
+        .topnav a:not(:first-child) {
+            display: none;
+        }
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
+    }
+    
+    @media screen and (max-width: 728px) {
+        .topnav.responsive {
+            position: relative;
+        }
+        .topnav.responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+    }

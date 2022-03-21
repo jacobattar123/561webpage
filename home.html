@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 
 
@@ -25,11 +26,16 @@
         <div class="container" id="top-banner">
 
             <div class="row">
-                <div class="col-auto">
+                <div class="col-auto-banner">
                     <br>
                     <a href="./home.html">
                         <img src="./images/FamilyDentalCareLogo.png" alt="Logo" width="75%" height="75%">
                     </a>
+                </div>
+
+                <div class="col-auto-banner" id="column-empty">
+                    <!--empty column to push the other colums-->
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
 
                 <div class="col-auto-banner" id="column-empty">
@@ -74,53 +80,101 @@
             </div>
         </div>
         <!-- top banner should be same among all pages -->
-        <div id="navbar-container">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link-current" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Our Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Offers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Make An Appointment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Insurrance</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
 
-            </ul>
+        <div class="topnav-container">
+            <div class="topnav" id="topnav">
+                <a href="#home" class="active">Home</a>
+                <a href="#news">Our Serivices</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About</a>
+                <a href="#contact">Make An Appointment</a>
+                <a href="#about">Gallery</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
         </div>
+
+
+
         <div class="carousel-container">
 
             <div id="carousel_slides" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="./images\woman_smile.jpg" alt="First slide">
+                        <div class="carousel-content">
+                            <h2>Top Rated Cosmetic in Your Area</h2>
+                            <h4>We Can Help You Smile Again</h4>
+                            <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
+                        </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="./images\smiling_people.jpg" alt="Second slide">
+
+                        <div class="carousel-content">
+                            <h2>We Take All Insurrance!</h2>
+                            <h4>We Can Help You Smile Again</h4>
+                            <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
+                        </div>
+
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="./images\girl_smiling_teeth.jpg" alt="Third slide">
+                        <div class="carousel-content">
+                            <h2>Quality You Can Trust</h2>
+                            <h4>We Can Help You Smile Again</h4>
+                            <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
         </div>
+
+        <!--<div class="tall-container" id="Meet-Dentist">
+            <div>
+                <h2>Meet The Dentist</h2>
+            </div>
+            <div class="medium-image-container">
+                <img src="images\DrStuart.PNG" alt="">
+            </div>
+            <div class="medium-text-container">
+                <h2> Dr. Stuart Price </h2>
+                <p> Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores enim aperiam tenetur culpa? Quam, nesciunt expedita incidunt cum iste fugiat! Nemo cupiditate est, laborum ea consequatur quo quam dolorem libero. Lorem Lorem, ipsum
+                    dolor sit amet consectetur adipisicing elit. Dolores enim aperiam tenetur culpa? Quam, nesciunt expedita incidunt cum iste fugiat! Nemo cupiditate est, laborum ea consequatur quo quam dolorem libero.</p>
+            </div>
+
+
+        </div>    -->
+
+        <div class="container" style="background-color: white;">
+            <div class="row">
+                <div class="col-sm-12" style="margin: 30px;">
+                    <h1>Meet Our Dentist!</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="background-color:white;  border-radius: 5px;">
+                    <img src="images\DrStuart.PNG" alt="" style="width: 100%; height: 100%;  border-radius: 5px; ">
+                </div>
+                <div class="col-sm-2" style="background-color: white;">
+
+                </div>
+                <div class="col-sm-4" style="background-color: white;" id="medium-text-container">
+                    <h2 style="margin-bottom: 30px; margin-top:30px">Dr. Stuart Price</h2>
+                    <p>Dr. Price is a responsible practicioner. He knows that dental proceedures can be intimidating for many people.
+                    </p>
+                    <p>He always reassures his patients that the proceedures are perfectly safe and generally pain free.
+                    </p>
+                    <p>In fact, he once even removed his own tooth, so patients can be sure that he knows what he is talking about.</p>
+                    <p>You have nothing to fear in the capable hands of Dr. Price. Schedule a one on one consulation to discuss your individual dental needs today!</p>
+                </div>
+            </div>
+        </div>
+
+
         <div>
 
             <div>
@@ -136,10 +190,56 @@
                 similique officia, aliquam ducimus natus earum? Expedita nihil repellat animi at nobis. Labore, suscipit! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis sequi quod nihil modi nisi eum, quis laborum. Facilis ipsa numquam
                 deleniti, at repellat labore eos. Dolores et laudantium perferendis maxime! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odit dignissimos tempora velit similique, id alias! Atque nesciunt doloribus rem quae, ducimus
                 eaque dolorem cumque laudantium dolorum nemo possimus labore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium modi, repellat aliquid voluptatem exercitationem expedita amet corporis assumenda architecto omnis qui
-                ipsum minus ipsam quibusdam eos voluptatum provident atque deserunt.
+                ipsum minus ipsam quibusdam eos voluptatum provident atque deserunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus recusandae autem expedita asperiores quos quidem similique minima distinctio, nisi assumenda
+                tempora sapiente qui doloremque maiores accusamus. Omnis, explicabo soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla quas, atque consectetur ipsa inventore natus accusamus exercitationem reiciendis blanditiis
+                placeat delectus quaerat consequuntur iste, illum quos expedita distinctio cupiditate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut deserunt fuga ratione cupiditate reiciendis maiores porro obcaecati? Ratione quis natus
+                nulla iure cupiditate, officiis, ducimus, iste maiores totam vel adipisci?;prelore, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum quibusdam iusto accusamus nulla ipsam pariatur eligendi omnis. Adipisci eos, voluptates
+                similique inventore unde facilis ullam commodi suscipit delectus ratione illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad repudiandae debitis ex sint iste exercitationem maiores dolorem culpa dicta odit. Tempora error
+                adipisci veritatis ad, saepe modi excepturi consequatur rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque doloribus asperiores, libero nulla animi, ut corrupti voluptas fugiat a alias, ipsa iure minus quae ea quasi
+                recusandae vitae. Quos, dolore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolores architecto quasi cum minus. Iusto harum sequi eum ullam voluptatum, natus itaque facere rem fuga, dolor debitis dolores quisquam
+                voluptate? Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe incidunt ut soluta obcaecati. Possimus maiores magnam temporibus molestias ipsum aspernatur dicta, excepturi, quas placeat eligendi id est iusto vero. Dolores? Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Hic, accusamus repellendus numquam sint officiis dicta laboriosam similique officia, aliquam ducimus natus earum? Expedita nihil repellat animi at nobis. Labore, suscipit! Lorem ipsum
+                dolor sit, amet consectetur adipisicing elit. Omnis sequi quod nihil modi nisi eum, quis laborum. Facilis ipsa numquam deleniti, at repellat labore eos. Dolores et laudantium perferendis maxime! Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Cupiditate odit dignissimos tempora velit similique, id alias! Atque nesciunt doloribus rem quae, ducimus eaque dolorem cumque laudantium dolorum nemo possimus labore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+                modi, repellat aliquid voluptatem exercitationem expedita amet corporis assumenda architecto omnis qui ipsum minus ipsam quibusdam eos voluptatum provident atque deserunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus
+                recusandae autem expedita asperiores quos quidem similique minima distinctio, nisi assumenda tempora sapiente qui doloremque maiores accusamus. Omnis, explicabo soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla
+                quas, atque consectetur ipsa inventore natus accusamus exercitationem reiciendis blanditiis placeat delectus quaerat consequuntur iste, illum quos expedita distinctio cupiditate! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Aut deserunt fuga ratione cupiditate reiciendis maiores porro obcaecati? Ratione quis natus nulla iure cupiditate, officiis, ducimus, iste maiores totam vel adipisci?;prelore, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum
+                quibusdam iusto accusamus nulla ipsam pariatur eligendi omnis. Adipisci eos, voluptates similique inventore unde facilis ullam commodi suscipit delectus ratione illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad repudiandae
+                debitis ex sint iste exercitationem maiores dolorem culpa dicta odit. Tempora error adipisci veritatis ad, saepe modi excepturi consequatur rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque doloribus asperiores, libero
+                nulla animi, ut corrupti voluptas fugiat a alias, ipsa iure minus quae ea quasi recusandae vitae. Quos, dolore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolores architecto quasi cum minus. Iusto harum sequi eum
+                ullam voluptatum, natus itaque facere rem fuga, dolor debitis dolores quisquam voluptate? Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe incidunt ut soluta obcaecati. Possimus maiores magnam temporibus molestias ipsum aspernatur
+                dicta, excepturi, quas placeat eligendi id est iusto vero. Dolores? Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, accusamus repellendus numquam sint officiis dicta laboriosam similique officia, aliquam ducimus natus earum?
+                Expedita nihil repellat animi at nobis. Labore, suscipit! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis sequi quod nihil modi nisi eum, quis laborum. Facilis ipsa numquam deleniti, at repellat labore eos. Dolores et laudantium
+                perferendis maxime! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odit dignissimos tempora velit similique, id alias! Atque nesciunt doloribus rem quae, ducimus eaque dolorem cumque laudantium dolorum nemo possimus
+                labore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium modi, repellat aliquid voluptatem exercitationem expedita amet corporis assumenda architecto omnis qui ipsum minus ipsam quibusdam eos voluptatum provident atque
+                deserunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic repellendus recusandae autem expedita asperiores quos quidem similique minima distinctio, nisi assumenda tempora sapiente qui doloremque maiores accusamus. Omnis, explicabo
+                soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla quas, atque consectetur ipsa inventore natus accusamus exercitationem reiciendis blanditiis placeat delectus quaerat consequuntur iste, illum quos expedita distinctio
+                cupiditate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut deserunt fuga ratione cupiditate reiciendis maiores porro obcaecati? Ratione quis natus nulla iure cupiditate, officiis, ducimus, iste maiores totam vel adipisci?;prelore,
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum quibusdam iusto accusamus nulla ipsam pariatur eligendi omnis. Adipisci eos, voluptates similique inventore unde facilis ullam commodi suscipit delectus ratione illo. Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Ad repudiandae debitis ex sint iste exercitationem maiores dolorem culpa dicta odit. Tempora error adipisci veritatis ad, saepe modi excepturi consequatur rerum. Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Itaque doloribus asperiores, libero nulla animi, ut corrupti voluptas fugiat a alias, ipsa iure minus quae ea quasi recusandae vitae. Quos, dolore! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Molestiae dolores architecto quasi cum minus. Iusto harum sequi eum ullam voluptatum, natus itaque facere rem fuga, dolor debitis dolores quisquam voluptate? Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe incidunt ut soluta
+                obcaecati. Possimus maiores magnam temporibus molestias ipsum aspernatur dicta, excepturi, quas placeat eligendi id est iusto vero. Dolores? Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, accusamus repellendus numquam sint
+                officiis dicta laboriosam similique officia, aliquam ducimus natus earum? Expedita nihil repellat animi at nobis. Labore, suscipit! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis sequi quod nihil modi nisi eum, quis laborum.
+                Facilis ipsa numquam deleniti, at repellat labore eos. Dolores et laudantium perferendis maxime! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odit dignissimos tempora velit similique, id alias! Atque nesciunt doloribus
+                rem quae, ducimus eaque dolorem cumque laudantium dolorum nemo possimus labore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium modi, repellat aliquid voluptatem exercitationem expedita amet corporis assumenda architecto
+                omnis qui ipsum minus ipsam quibusdam eos voluptatum provident atque deserunt.
             </div>
 
         </div>
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById("topnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
+
 
 </body>
 
