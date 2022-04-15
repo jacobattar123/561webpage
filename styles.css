@@ -1,6 +1,5 @@
 #main-container {
     width: 100%;
-    min-width: 100vw;
     height: 100%;
     display: block;
 }
@@ -9,9 +8,10 @@
 /*Start style for top banner*/
 
 #top-banner {
-    display: grid;
-    width: fit-content;
-    margin-left: none;
+    display: flex;
+    min-width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 
@@ -88,10 +88,10 @@
 }
 
 .carousel-content {
-    left: 40%;
-    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
     position: absolute;
-    top: 30%;
+    top: 50%;
     z-index: 20;
     color: white;
     /*text-shadow: 0 1px 2px rgba(0, 0, 0, .6);*/
@@ -129,14 +129,7 @@
 .row h1 {
     text-align: center;
     margin-right: 180px;
-}
-
-#medium-text-container {
-    text-align: center;
-    -moz-box-shadow: inset 0 0 10px #000000;
-    -webkit-box-shadow: inset 0 0 5px #000000;
-    box-shadow: inset 0 0 3px #000000;
-    border-radius: 5px;
+    color: #00a8f3;
 }
 
 #right-text {
@@ -167,20 +160,57 @@
     color: rgb(99, 99, 99);
 }
 
+
+/*Styles for dentist bio*/
+
+#dentist-img {
+    width: 200px;
+    height: 400px;
+}
+
+#medium-text-container {
+    text-align: center;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow: inset 0 0 3px #000000;
+    border-radius: 5px;
+    height: 550px;
+    padding: 10px;
+}
+
+.fullwidth-container {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background-color: #f1f1f1;
+    height: 750px;
+    margin-bottom: 50px;
+}
+
+.real-content {
+    background-color: aliceblue;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#container-hours-operation span {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 15px;
+    border-style: solid;
+    border-color: #00a8f3;
+    border-width: 0px 0px 2px 0px;
+    padding-bottom: 5px;
+}
+
 @media screen and (max-width: 1200px) {
+    #column-email {
+        display: none!important;
+    }
+    #column-phone {
+        display: none!important;
+    }
     .row #column-empty {
-        display: none!important;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .row #column-email {
-        display: none!important;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .row #column-phone {
         display: none!important;
     }
 }
@@ -193,9 +223,6 @@
         float: right;
         display: block;
     }
-}
-
-@media screen and (max-width: 800px) {
     .topnav.responsive {
         position: relative;
     }
@@ -209,4 +236,14 @@
         display: block;
         text-align: left;
     }
+}
+
+@media screen and (max-width: 1000px) {
+    .row #col-placeholder {
+        display: none!important;
+    }
+}
+
+.grow {
+    flex: 1;
 }
