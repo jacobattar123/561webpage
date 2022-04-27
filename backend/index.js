@@ -4,6 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const port = 8080;
+const process = require('process');
 
 console.log("starting backend server");
 
@@ -42,7 +43,11 @@ app.post('/auth', function(request, response) {
                 console.log("loggedin = true");
                 request.session.email_auth = patient_email;
                 // Redirect to home page
+                console.log("Current working directory: ",
+                    process.cwd());
                 response.redirect('/dashboard');
+                console.log("Current working directory: ",
+                    process.cwd());
             } else {
                 response.send('Incorrect Username and/or Password!');
                 console.log("incorrect Email or Password");
@@ -59,6 +64,7 @@ app.get('/dashboard', function(request, response) {
     // If the user is loggedin
     if (request.session.loggedin) {
         // Output username
+        response.sendFile(path.join(__dirname, '../dashboard.html'));
         response.send('Welcome back, ' + request.session.email_auth + '!');
     } else {
         // Not logged in
