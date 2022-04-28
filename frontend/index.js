@@ -9,7 +9,7 @@ console.log('Server started at http://localhost:' + port);
 app.all('*', (req, res, next) => {
     console.log(req.originalUrl);
     next();
-})
+});
 
 app.use(express.json());
 

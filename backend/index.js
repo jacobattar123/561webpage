@@ -1,9 +1,9 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 const config = require('./config.json');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const port = 8080;
+const port = 8888;
 const process = require('process');
 
 console.log("starting backend server");
@@ -20,43 +20,44 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'static')));
 
-app.post('/auth', function(request, response) {
+app.all('*', (req, res, next) => {
+    console.log(req.body);
+    next();
+});
+
+app.post('/login', async(req, res) => {
     // Capture the input fields
-    const patient_email = request.body.email_auth;
-    const password = request.body.password_auth;
+    const patient_email = req.body.email;
+    const password = req.body.password;
+
     // Ensure the input fields exists and are not empty
     if (patient_email && password) {
         // Execute SQL query that'll select the account from the database based on the specified username and password
-        con.query('SELECT * FROM patients WHERE patient_email = ? AND password_hash = ?', [patient_email, password], (error, results, fields) => {
-            // If there is an issue with the query, output the error
-            if (error) {
-                console.log(error);
-                //throw error;  
-            }
-            console.log(results);
-            // If the account exists           
-            if (results.length > 0) {
-                // Authenticate the user
-                request.session.loggedin = true;
-                console.log("loggedin = true");
-                request.session.email_auth = patient_email;
-                // Redirect to home page
-                console.log("Current working directory: ",
-                    process.cwd());
-                response.redirect('/dashboard');
-                console.log("Current working directory: ",
-                    process.cwd());
+        const query = `
+        SELECT * FROM patients
+        WHERE patient_email = ? AND password_hash = ?
+        `;
+        con.query(query, [patient_email, password], (err, rows) => {
+            if (err) {
+                console.log(err);
+                // send error response to client
+                return;
             } else {
-                response.send('Incorrect Username and/or Password!');
-                console.log("incorrect Email or Password");
+                if (rows && rows.length > 0) {
+                    console.log(rows[0]);
+                    // user is valid. proceed with authentication oauth with bearer tokens
+                } else {
+                    res.status(401).json({
+                        message: "Invalid username or password."
+                    });
+                }
             }
-            response.end();
         });
     } else {
-        response.send('Please enter Username and Password!');
-        response.end();
+        res.status(401).json({
+            message: "Invalid username or password."
+        });
     }
 });
 
