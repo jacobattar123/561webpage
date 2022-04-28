@@ -3,12 +3,16 @@ const config = require('./config.json');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const port = 8888;
+const port = 4040;
 const process = require('process');
+const db = require('./dbutil');
+
+
 
 console.log("starting backend server");
 
 var con = mysql.createConnection(config);
+
 
 const app = express();
 
@@ -31,33 +35,37 @@ app.post('/login', async(req, res) => {
     const patient_email = req.body.email;
     const password = req.body.password;
 
-    // Ensure the input fields exists and are not empty
     if (patient_email && password) {
-        // Execute SQL query that'll select the account from the database based on the specified username and password
-        const query = `
-        SELECT * FROM patients
-        WHERE patient_email = ? AND password_hash = ?
-        `;
-        con.query(query, [patient_email, password], (err, rows) => {
-            if (err) {
-                console.log(err);
-                // send error response to client
-                return;
-            } else {
-                if (rows && rows.length > 0) {
-                    console.log(rows[0]);
-                    // user is valid. proceed with authentication oauth with bearer tokens
-                } else {
-                    res.status(401).json({
-                        message: "Invalid username or password."
-                    });
-                }
-            }
+        db.checkCredentials(patient_email, password).then(data => {
+            res.json(data);
+        }).catch(err => {
+            res.status(401).json(err);
         });
     } else {
-        res.status(401).json({
-            message: "Invalid username or password."
+        res.status(401).json("Invalid userId or password.");
+    }
+
+
+});
+
+app.get('/appointments/:userId', (req, res) => {
+    db.getAppointmentsByUser(req.params.userId).then(rows => {
+        res.json(rows);
+    }).catch(err => {
+        res.status(401).json(err);
+    });
+});
+
+app.get('/appointments', (req, res) => {
+    const authorized = true; // check if authorized
+    if (authorized) {
+        db.getAppointmentsAll().then(rows => {
+            res.json(rows);
+        }).catch(err => {
+            res.status(401).json(err);
         });
+    } else {
+        res.status(401).json("Not authorized");
     }
 });
 
