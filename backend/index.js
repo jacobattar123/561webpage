@@ -48,15 +48,25 @@ app.post('/login', async(req, res) => {
 
 });
 
-app.get('/appointments/:userId', (req, res) => {
-    db.getAppointmentsByUser(req.params.userId).then(rows => {
+// user id passed in query string
+app.get('/appointments', (req, res) => {
+    db.getAppointmentsByUser(req.query.userId).then(rows => {
         res.json(rows);
     }).catch(err => {
         res.status(401).json(err);
     });
 });
 
-app.get('/appointments', (req, res) => {
+// add new appointment
+app.post('/appointments', (req, res) => {
+    console.log(req.body);
+});
+
+app.delete('/appointments/:appointmentId'), (req, res) => {
+
+}
+
+app.get('/admin/appointments', (req, res) => {
     const authorized = true; // check if authorized
     if (authorized) {
         db.getAppointmentsAll().then(rows => {
@@ -70,16 +80,7 @@ app.get('/appointments', (req, res) => {
 });
 
 app.get('/dashboard', function(request, response) {
-    // If the user is loggedin
-    if (request.session.loggedin) {
-        // Output username
-        response.sendFile(path.join(__dirname, '../dashboard.html'));
-        response.send('Welcome back, ' + request.session.email_auth + '!');
-    } else {
-        // Not logged in
-        response.send('Please login to view this page!');
-    }
-    response.end();
+
 });
 
 app.listen(port);

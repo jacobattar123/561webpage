@@ -58,6 +58,18 @@ function checkCredentials(userId, password) {
     });
 }
 
+function addAppointment() {
+    // 1. Check who is making the appointment
+    // AKA get patient_id for given patient_email
+    // 2. Check if requested time is open (SELECT)
+    // If open. add to db and send back success (INSERT)
+    // If closed. send back error.
+}
+
+function cancelAppointment() {
+    // Delete appointment by id
+}
+
 module.exports = {
     con,
     getAppointmentsByUser,
