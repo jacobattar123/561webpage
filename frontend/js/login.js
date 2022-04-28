@@ -1,3 +1,12 @@
+// Check if user is logged in:
+const isLoggedIn = true;
+
+window.addEventListener("load", () => {
+    if (isLoggedIn) {
+        window.location.href = "dashboard.html";
+    }
+});
+
 const container = document.querySelector(".container"),
     pwShowHide = document.querySelectorAll(".showHidePw"),
     pwFields = document.querySelectorAll(".password"),
