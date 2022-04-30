@@ -30,19 +30,28 @@ app.all('*', (req, res, next) => {
     next();
 });
 
-app.post('/login', async(req, res) => {
+
+//postman syntax 
+/*{
+
+  "email":  "ja@email.com",
+   "password": "password"
+    
+}*/
+
+app.post('/login', (req, res) => {
     // Capture the input fields
     const patient_email = req.body.email;
     const password = req.body.password;
 
     if (patient_email && password) {
         db.checkCredentials(patient_email, password).then(data => {
-            res.json(data);
+            res.json({ data });
         }).catch(err => {
             res.status(401).json(err);
         });
     } else {
-        res.status(401).json("Invalid userId or password.");
+        res.status(401).json("No username enter");
     }
 
 
@@ -59,12 +68,23 @@ app.get('/appointments', (req, res) => {
 
 // add new appointment
 app.post('/appointments', (req, res) => {
-    console.log(req.body);
-});
+    console.log(req.body); // not needed
+    // From the browser body
+    const patient_id = req.body.id;
+    const start_time = req.body.start;
+    const end_time = req.body.end;
 
+    db.addAppointment(patient_id, start_time, end_time).then(data => {
+        res.json(data);
+    }).catch(err => {
+        res.status(401).json(err);
+    });
+});
 app.delete('/appointments/:appointmentId'), (req, res) => {
 
 }
+
+
 
 app.get('/admin/appointments', (req, res) => {
     const authorized = true; // check if authorized
@@ -77,6 +97,10 @@ app.get('/admin/appointments', (req, res) => {
     } else {
         res.status(401).json("Not authorized");
     }
+});
+
+app.delete('/admin/patients/:patientid', (req, res) => {
+
 });
 
 app.get('/dashboard', function(request, response) {

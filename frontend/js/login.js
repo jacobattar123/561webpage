@@ -41,3 +41,14 @@ signUp.addEventListener("click", () => {
 login.addEventListener("click", () => {
     container.classList.remove("active");
 });
+/*
+localStorage.set('passport', 'mypassport');
+
+let table;
+table += "<tbody>"
+[].forEach((val, index) => {
+    table += '<tr>';
+    table += `<td>${}</td>`
+})
+
+element.innerHtml = table; */
