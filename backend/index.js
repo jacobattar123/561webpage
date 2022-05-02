@@ -6,12 +6,9 @@ const path = require('path');
 const port = 4040;
 const process = require('process');
 const db = require('./dbutil');
-
-
+const mathutil = require('./mathutil');
 
 console.log("starting backend server");
-
-var con = mysql.createConnection(config);
 
 
 const app = express();
@@ -25,12 +22,6 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.all('*', (req, res, next) => {
-    console.log(req.body);
-    next();
-});
-
-
 //postman syntax 
 /*{
 
@@ -39,6 +30,7 @@ app.all('*', (req, res, next) => {
     
 }*/
 
+//************ Unauthenticated
 app.post('/login', (req, res) => {
     // Capture the input fields
     const patient_email = req.body.email;
@@ -46,15 +38,63 @@ app.post('/login', (req, res) => {
 
     if (patient_email && password) {
         db.checkCredentials(patient_email, password).then(data => {
-            res.json({ data });
+            const token = mathutil.generateToken();
+            db.addToken(data.id, token).then(result => {
+                data.access_token = token;
+                res.json(data);
+            });
         }).catch(err => {
             res.status(401).json(err);
         });
     } else {
         res.status(401).json("No username enter");
     }
+});
+
+app.post('/patients', (req, res) => {
+    const newPatient = {...req.body };
+    db.addPatient(newPatient).then(data => {
+        res.json({
+            message: "New user created."
+        });
+    }).catch(err => {
+        res.status(401).json({
+            message: "Unable to register user."
+        });
+    });
+});
+//************
+
+app.all('*', (req, res, next) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (!passport) {
+        res.json("Not authenticated.");
+    }
+    db.verifyToken(passport.id, passport.access_token).then(data => {
+        next();
+    }).catch(err => res.json("Not authenticated."))
+});
 
 
+app.delete('/appointments/:appointmentId', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
+        db.deleteAppointment(req.params.appointmentId).then(data => {
+            res.json({
+                message: `Successfully deleted appointment #${req.params.appointmentId}`
+            });
+        });
+    } else {
+        db.verifyAppointment(passport.id, req.params.appointmentId).then(data => {
+            return db.deleteAppointment(req.params.appointmentId);
+        }).then(data => {
+            res.json({
+                message: `Successfully deleted appointment #${req.params.appointmentId}`
+            });
+        }).catch(err => {
+            res.status(400).json({ error: err });
+        });
+    }
 });
 
 // user id passed in query string
@@ -66,29 +106,27 @@ app.get('/appointments', (req, res) => {
     });
 });
 
+
 // add new appointment
 app.post('/appointments', (req, res) => {
     console.log(req.body); // not needed
     // From the browser body
-    const patient_id = req.body.id;
-    const start_time = req.body.start;
-    const end_time = req.body.end;
+    const patient_id = req.body.patient_id;
+    const start_date = req.body.start_date;
+    const end_date = req.body.end_date;
+    const notes = req.body.notes;
+    const reason = req.body.reason;
 
-    db.addAppointment(patient_id, start_time, end_time).then(data => {
+    db.addAppointment(patient_id, start_date, end_date, notes, reason).then(data => {
         res.json(data);
     }).catch(err => {
         res.status(401).json(err);
     });
 });
-app.delete('/appointments/:appointmentId'), (req, res) => {
 
-}
-
-
-
-app.get('/admin/appointments', (req, res) => {
-    const authorized = true; // check if authorized
-    if (authorized) {
+app.get('/admin/appointments', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
         db.getAppointmentsAll().then(rows => {
             res.json(rows);
         }).catch(err => {
@@ -99,12 +137,28 @@ app.get('/admin/appointments', (req, res) => {
     }
 });
 
-app.delete('/admin/patients/:patientid', (req, res) => {
-
+app.get('/admin/patients', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
+        db.getPatientsAll().then(rows => {
+            res.json(rows);
+        }).catch(err => {
+            res.status(401).json(err);
+        });
+    } else {
+        res.status(401).json("Not authorized");
+    }
 });
 
-app.get('/dashboard', function(request, response) {
-
+app.delete('/admin/patients/:patientId', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
+        db.deletePatient(req.params.patientId).then(data => {
+            res.json({
+                message: `Successfully deleted patient #${req.params.patientId}`
+            });
+        });
+    }
 });
 
 app.listen(port);
