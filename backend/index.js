@@ -7,12 +7,26 @@ const port = 4040;
 const process = require('process');
 const db = require('./dbutil');
 const mathutil = require('./mathutil');
+const cors = require('cors');
+
+const whitelist = ["http://localhost:8080"];
+const corsConfig = cors({
+    origin: (origin, callback) => {
+        if (!origin) {
+            return callback(null, true);
+        } else if (whitelist.indexOf(origin) === -1) {
+            let message = "This origin is not allowed";
+            return callback(message, false);
+        } else {
+            return callback(null, true);
+        }
+    }
+});
 
 console.log("starting backend server");
 
-
 const app = express();
-
+app.use(corsConfig);
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -51,6 +65,17 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.get('/login', (req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (!passport) {
+        res.status(400).json("Not authenticated.");
+        return;
+    }
+    db.verifyToken(passport.id, passport.access_token).then(data => {
+        res.json("Already logged in.");
+    }).catch(err => res.json("Not authenticated."))
+});
+
 app.post('/patients', (req, res) => {
     const newPatient = {...req.body };
     db.addPatient(newPatient).then(data => {
@@ -69,6 +94,7 @@ app.all('*', (req, res, next) => {
     const passport = JSON.parse(req.headers.passport);
     if (!passport) {
         res.json("Not authenticated.");
+        return;
     }
     db.verifyToken(passport.id, passport.access_token).then(data => {
         next();
@@ -99,7 +125,8 @@ app.delete('/appointments/:appointmentId', async(req, res) => {
 
 // user id passed in query string
 app.get('/appointments', (req, res) => {
-    db.getAppointmentsByUser(req.query.userId).then(rows => {
+    const passport = JSON.parse(req.headers.passport);
+    db.getAppointmentsByUser(passport.id).then(rows => {
         res.json(rows);
     }).catch(err => {
         res.status(401).json(err);
@@ -109,7 +136,6 @@ app.get('/appointments', (req, res) => {
 
 // add new appointment
 app.post('/appointments', (req, res) => {
-    console.log(req.body); // not needed
     // From the browser body
     const patient_id = req.body.patient_id;
     const start_date = req.body.start_date;

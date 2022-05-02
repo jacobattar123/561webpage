@@ -5,10 +5,11 @@ const con = mysql.createConnection(config);
 const mathutil = require('./mathutil');
 
 function getAppointmentsByUser(patientId) {
+    console.log(patientId);
     const query1 = `
-        SELECT appointments.*
-        FROM patients, appointments
-        WHERE patients.patient_email = ? AND patients.id = appointments.patient_id 
+        SELECT *
+        FROM appointments
+        WHERE patient_id = ? 
     `;
     return new Promise((resolve, reject) => {
         con.query(query1, [patientId], (err, rows) => {

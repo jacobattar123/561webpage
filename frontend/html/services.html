@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-  Tasks:
-    -Fix top banner overflow
-    -Login button burger menu
-    -Banner background image
-    -Services stacking (images should always be on top then text)
-    -Schedule button centering
-    -Footer buttons + links
-    -General images + texts
--->
 
 <head>
+
     <title>Generic Dentist Site</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Styles I made for myself-->
-
-
+    <style>
+        .button {
+            background-color: #00a8f3;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #cdecef;
+            color: #00a8f3;
+            transition: 0.3s;
+        }
+        
+        .img-clean {
+            object-fit: cover;
+            width: 100%;
+            height: 400px;
+            border-radius: 5px;
+        }
+    </style>
 
 </head>
 
@@ -92,30 +107,49 @@
     </div>
 
     <!--Banner-->
-    <div class="container-banner main-banner" id="a-banner">
-        <h1 class="text-center">Our Services</h1>
+    <div class="container-banner">
+        <img src="../assets/images/banner-center.png" alt="Banner" style="object-fit: cover; width: 100%; height: 300px">
+
+        <div class="banner-text-centered">OUR SERVICES</div>
     </div>
 
     <!--Services-->
+    <div class="container-fluid real-content">
+        <div class="container">
+            <div class="row flex-column-reverse flex-md-row">
+                <div class="col-sm-6">
+                    <br>
+                    <h2 class="text-center">Cleaning</h2>
+                    <br>
+                    <p class="text-center hidden-xs">We provide teeth cleanings to our patients</p>
+                    <p class="text-center hidden-xs">Our doctors will provide the best cleanings to remove plaque and keep teeth healthy</p>
+                    <br>
+                    <div style="text-align: center;">
+                        <button class="button">Schedule</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <img src="../assets/images/cleaning.jpg" alt="Cleaning" class="img-rounded img-responsive center-block img-clean">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid real-content" style="background-color: white;">
         <div class="container">
-            <div class="row">
-                <div class="text-center hidden-xs">
-                    <h3>Main Services</h3>
-                    <p>below is our main services</p>
-                </div>
-                <br>
+            <div class="row flex-column flex-md-row">
                 <div class="col-sm-6">
-                    <img src="../assets/images/test.png" alt="" style="width: 100%; height: 100%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
+                    <img src="../assets/images/braces.jpg" alt="Braces" class="img-rounded img-responsive center-block img-clean">
                 </div>
                 <div class="col-sm-6">
-                    <h3 class="text-center">Column</h3>
-                    <p class="text-center hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p class="text-center hidden-xs">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
                     <br>
-                    <div class="container" style="padding-left: 43%;">
-                        <!--idk-->
-                        <button>Schedule</button>
+                    <h2 class="text-center">Braces</h2>
+                    <br>
+                    <p class="text-center hidden-xs">We provide braces to our patients teeth</p>
+                    <p class="text-center hidden-xs">Our doctors can provide the choice of metal braces or silicon braces</p>
+                    <br>
+                    <div style="text-align: center;">
+                        <button class="button">Schedule</button>
                     </div>
                 </div>
             </div>
@@ -124,18 +158,20 @@
 
     <div class="container-fluid real-content">
         <div class="container">
-            <div class="row">
+            <div class="row flex-column-reverse flex-md-row">
                 <div class="col-sm-6">
-                    <h3 class="text-center">Column</h3>
-                    <p class="text-center hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p class="text-center hidden-xs">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
                     <br>
-                    <div class="container" style="padding-left: 43%;">
-                        <button>Schedule</button>
+                    <h2 class="text-center">X-rays</h2>
+                    <br>
+                    <p class="text-center hidden-xs">We provide dental x-rays to our patients</p>
+                    <p class="text-center hidden-xs">Our doctors can provide dental x-rays to catch hidden abnormalities, like cavaties</p>
+                    <br>
+                    <div style="text-align: center;">
+                        <button class="button">Schedule</button>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <img src="../assets/images/test.png" alt="" style="width: 100%; height: 100%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
+                    <img src="../assets/images/xray.jpg" alt="Xray" style="object-fit: cover; width: 100%; height: 400px;  border-radius: 5px; " class="img-rounded img-responsive center-block">
                 </div>
             </div>
         </div>
@@ -143,55 +179,19 @@
 
     <div class="container-fluid real-content" style="background-color: white;">
         <div class="container">
-            <div class="row">
+            <div class="row flex-column flex-md-row">
                 <div class="col-sm-6">
-                    <img src="../assets/images/test.png" alt="" style="width: 100%; height: 100%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
+                    <img src="../assets/images/roots.jpg" alt="Root" style="object-fit: cover; width: 100%; height: 400px;  border-radius: 5px; " class="img-rounded img-responsive center-block">
                 </div>
                 <div class="col-sm-6">
-                    <h3 class="text-center">Column</h3>
-                    <p class="text-center hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p class="text-center hidden-xs">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
                     <br>
-                    <div class="container" style="padding-left: 43%;">
-                        <button>Schedule</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid real-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="text-center">Column</h3>
-                    <p class="text-center hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p class="text-center hidden-xs">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <h2 class="text-center">Root Extraction</h2>
                     <br>
-                    <div class="container" style="padding-left: 43%;">
-                        <button>Schedule</button>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <img src="../assets/images/test.png" alt="" style="width: 100%; height: 100%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid real-content" style="background-color: white;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <img src="../assets/images/test.png" alt="" style="width: 100%; height: 100%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
-                </div>
-                <div class="col-sm-6">
-                    <h3 class="text-center">Column</h3>
-                    <p class="text-center hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p class="text-center hidden-xs">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <p class="text-center hidden-xs">We provide root extraction to our patients</p>
+                    <p class="text-center hidden-xs">Our doctors can remove teeth that are long from saving through root extraction</p>
                     <br>
-                    <div class="container" style="padding-left: 43%;">
-                        <button>Schedule</button>
+                    <div style="text-align: center;">
+                        <button class="button">Schedule</button>
                     </div>
                 </div>
             </div>
@@ -288,10 +288,6 @@
             }
         }
     </script>
-
-
-
-
 
 </body>
 

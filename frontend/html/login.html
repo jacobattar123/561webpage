@@ -23,13 +23,13 @@
                 </a>
                 <h3 class="title">Login </h3>
 
-                <form action="/auth">
+                <form id="loginForm">
                     <div class="input-field">
-                        <input type="text" placeholder="Enter your email" id="email_auth" required>
+                        <input name="email" type="text" placeholder="Enter your email" id="email_auth" required>
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password" id="password_auth" required>
+                        <input name="password" type="password" class="password" placeholder="Enter your password" id="password_auth" required>
                         <i class="uil uil-lock icon"></i>
                     </div>
 
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="submit" value="Login">
+                        <input type="button" onclick="handleLogin()" value="Submit">
                     </div>
                 </form>
 
@@ -103,6 +103,7 @@
         </div>
     </div>
 
+    <script src="../js/api_config.js"></script>
     <script src="../js/login.js"></script>
 
 </body>
