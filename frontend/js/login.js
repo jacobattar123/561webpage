@@ -51,6 +51,7 @@ login.addEventListener("click", () => {
     container.classList.remove("active");
 });
 
+//get the user email and password that they are using to sign in
 function handleLogin() {
     const formData = new FormData(document.getElementById('loginForm'));
     const body = {};
@@ -65,26 +66,75 @@ function handleLogin() {
             },
             body: JSON.stringify(body)
         }).then(res => {
-            if (res.ok) {
+            if (res.ok) //not 400 status error. (res is the result from the fetch above)
+            {
                 return res.json()
             } else {
                 return null;
             }
         })
+        //passport gets added to the local storage / headers
         .then(data => {
             if (!data) {
                 alert("Invalid username or password");
                 return;
             } else {
+
                 localStorage.setItem('passport', JSON.stringify({
                     id: data.id,
                     access_token: data.access_token,
                 }));
+                //now the user has been verified so change the user view to the dashboard.
                 window.location.href = "dashboard.html"
                 return;
             }
         });
 }
+
+function handleRegistration() {
+    const formData = new FormData(document.getElementById('registrationForm'));
+    const body = {};
+    formData.forEach((val, key) => {
+        body[key] = val;
+    });
+    console.log(body);
+    fetch(`${api_path}/patients`, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    }).then(res => {
+        if (res.ok) {
+            alert("User has been registered. Please go back to login.");
+            return;
+        } else {
+            alert("Unable to register user.");
+            return;
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 localStorage.set('passport', 'mypassport');
 

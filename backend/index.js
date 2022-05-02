@@ -9,6 +9,8 @@ const db = require('./dbutil');
 const mathutil = require('./mathutil');
 const cors = require('cors');
 
+
+
 const whitelist = ["http://localhost:8080"];
 const corsConfig = cors({
     origin: (origin, callback) => {
@@ -45,16 +47,23 @@ app.use(express.urlencoded({ extended: true }));
 }*/
 
 //************ Unauthenticated
+
+//post login info to backend to verify email and password to login
 app.post('/login', (req, res) => {
     // Capture the input fields
     const patient_email = req.body.email;
     const password = req.body.password;
 
     if (patient_email && password) {
+        //TO DO::: pass password through hash first. then send that to check credentials
         db.checkCredentials(patient_email, password).then(data => {
+            //at this point data is returned, but has old access token.
+            //generate access token
             const token = mathutil.generateToken();
             db.addToken(data.id, token).then(result => {
+                //reupdate the accesstoken
                 data.access_token = token;
+                //return data
                 res.json(data);
             });
         }).catch(err => {
@@ -65,6 +74,7 @@ app.post('/login', (req, res) => {
     }
 });
 
+//?
 app.get('/login', (req, res) => {
     const passport = JSON.parse(req.headers.passport);
     if (!passport) {
@@ -76,6 +86,8 @@ app.get('/login', (req, res) => {
     }).catch(err => res.json("Not authenticated."))
 });
 
+
+//creating a new patient (registration)
 app.post('/patients', (req, res) => {
     const newPatient = {...req.body };
     db.addPatient(newPatient).then(data => {
@@ -83,6 +95,7 @@ app.post('/patients', (req, res) => {
             message: "New user created."
         });
     }).catch(err => {
+        console.log(err);
         res.status(401).json({
             message: "Unable to register user."
         });
@@ -123,7 +136,7 @@ app.delete('/appointments/:appointmentId', async(req, res) => {
     }
 });
 
-// user id passed in query string
+
 app.get('/appointments', (req, res) => {
     const passport = JSON.parse(req.headers.passport);
     db.getAppointmentsByUser(passport.id).then(rows => {

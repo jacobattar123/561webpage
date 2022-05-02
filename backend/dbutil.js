@@ -192,6 +192,7 @@ function addToken(id, token) {
             if (err) {
                 return reject();
             }
+            //what does this res return?
             return resolve(res);
         })
     });

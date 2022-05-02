@@ -1,5 +1,5 @@
 // Check if user is logged in:
-const isLoggedIn = true;
+
 fetch(`${api_path}/login`, {
         method: "GET",
         headers: {
