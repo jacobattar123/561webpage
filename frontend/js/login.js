@@ -8,7 +8,11 @@ fetch(`${api_path}/login`, {
         },
     }).then(res => {
         if (res.ok) {
-            window.location.href = "dashboard.html";
+            //"passport" : "id" , "access-token", "is_admin"
+            const passport = JSON.parse(window.localStorage.getItem('passport'));
+            if (passport.is_admin) {
+                window.location.href = "dashboard_admin.html";
+            } else window.location.href = "dashboard_patient.html";
         }
     })
     .catch(err => {
@@ -83,10 +87,17 @@ function handleLogin() {
                 localStorage.setItem('passport', JSON.stringify({
                     id: data.id,
                     access_token: data.access_token,
+                    is_admin: data.is_admin
                 }));
                 //now the user has been verified so change the user view to the dashboard.
-                window.location.href = "dashboard.html"
-                return;
+                if (data.is_admin) {
+                    window.location.href = "dashboard_admin.html";
+                    return;
+                } else {
+                    window.location.href = "dashboard_patient.html";
+                }
+
+
             }
         });
 }

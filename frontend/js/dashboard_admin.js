@@ -17,7 +17,7 @@ fetch(`${api_path}/login`, {
     });
 
 fetch(`${api_path}/appointments`, {
-        headers: {
+        headers: { // next two lines 
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'passport': localStorage.getItem('passport'),
@@ -26,8 +26,10 @@ fetch(`${api_path}/appointments`, {
     .then(res => res.json())
     .then(data => {
         console.log(data);
+        //sorting the data
         let sorted = data.sort((a, b) => (new Date(a.start_date) > new Date(b.start_date) ? 1 : -1));
         console.log(sorted);
+
         loadAppointments(data);
     }).catch(err => {
         console.log("my error: ", err);
@@ -69,9 +71,20 @@ function cancelAppointment(id) {
     // make call to back end to cancel appointment
 }
 
-function setPassport(id, access_token) {
+function logOut() {
+    window.location.href = "home.html";
+    localStorage.setItem('passport', {
+        id: "NULL",
+        access_token: "NULL",
+        is_admin: "NULL"
+
+    });
+}
+
+function setPassport(id, access_token, is_admin) {
     localStorage.setItem('passport', JSON.stringify({
         id,
         access_token,
+        is_admin,
     }));
 }

@@ -11,10 +11,41 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="../js/api_config.js"></script>
+    <script src="../js/dashboard_admin.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 
-
+    <style>
+        /*Dashboard styles will change later*/
+        
+        .main {
+            padding-top: 50px;
+        }
+        
+        @media (min-width: 768px) {
+            .main {
+                padding-right: 240px;
+                padding-left: 240px;
+            }
+        }
+        
+        .dash {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .dash img {
+            display: inline-block;
+            border-radius: 50%;
+        }
+        
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(odd)>th {
+            background-color: red;
+        }
+    </style>
 
 
 </head>
@@ -74,7 +105,7 @@
             <a href="./home.html" class="active">Home</a>
             <a href="./services.html">Our Services</a>
             <a href="./about_us.html">About</a>
-            <a href="./login.html">Login</a>
+            <a href="./home.html" onclick="logOut()">Log Out</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -83,98 +114,57 @@
 
 
 
-    <div class="carousel-container">
 
-        <div id="carousel_slides" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="../assets/images/woman_smile.jpg" alt="First slide">
-                    <div class="carousel-content">
-                        <h2>Top Rated Cosmetic in Your Area</h2>
-                        <h4>We Can Help You Smile Again</h4>
-                        <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/images/smiling_people.jpg" alt="Second slide">
 
-                    <div class="carousel-content">
-                        <h2>We Take All Insurances!</h2>
-                        <h4>We Can Help You Smile Again</h4>
-                        <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
-                    </div>
+    <!--Dashboard main-->
+    <div class="col main">
 
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/images/girl_smiling_teeth.jpg" alt="Third slide">
-                    <div class="carousel-content">
-                        <h2>Quality You Can Trust</h2>
-                        <h4>We Can Help You Smile Again</h4>
-                        <a href="#Make-An-Appointment" class="bordered-a-tag">Schedule An Appointment</a>
-                    </div>
-                </div>
+        <div class="row dash">
+            <div class="col-xs-6 col-sm-3">
+                <img src="../assets/images/DrStuart.png" width="200" height="200" class="img-responsive" alt="Profile">
+                <h4 alt="NAME">ADMIN</h4>
+                <p alt="ADDRESS">12345 Basic Street</p>
+                <p alt="PHONE">555-444-7777</p>
+                <p alt="INSURANCE">Insurance</p>
+                <p alt="EMAIL">Jon@mail.com</p>
             </div>
-        </div>
+
+            <div class="col-xs-6 col-sm-9">
+                <h5 style="text-align:left">Appointments</h5>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Time</th>
+                                <th>Reason</th>
+                                <th>Notes</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
 
-    </div>
-
-    <!--<div class="tall-container" id="Meet-Dentist">
-            <div>
-                <h2>Meet The Dentist</h2>
-            </div>
-            <div class="medium-image-container">
-                <img src="images\DrStuart.PNG" alt="">
-            </div>
-            <div class="medium-text-container">
-                <h2> Dr. Stuart Price </h2>
-                <p> Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores enim aperiam tenetur culpa? Quam, nesciunt expedita incidunt cum iste fugiat! Nemo cupiditate est, laborum ea consequatur quo quam dolorem libero. Lorem Lorem, ipsum
-                    dolor sit amet consectetur adipisicing elit. Dolores enim aperiam tenetur culpa? Quam, nesciunt expedita incidunt cum iste fugiat! Nemo cupiditate est, laborum ea consequatur quo quam dolorem libero.</p>
-            </div>
-        </div>    -->
-
-    <div class="container-fluid real-content" style="margin-top:25px; margin-bottom: -100px;background-color:  white;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="text-center">Dr. Stuart Price</h3>
-                    <p class="text-center hidden-xs">Dr. Price is a responsible practicioner. He knows that dental proceedures can be intimidating for many people. He always reassures his patients that the proceedures are perfectly safe and generally pain free. </p>
-                    <p class="text-center hidden-xs">In fact, he once even removed his own tooth, so patients can be sure that he knows what he is talking about.</p>
-                    <p class="text-center hidden-xs">You have nothing to fear in the capable hands of Dr. Price. Schedule a one on one consulation to discuss your individual dental needs today!</p>
-                    <br>
-                </div>
-                <div class="col-sm-6">
-                    <img src="../assets/images/DrStuart.PNG" alt="" style="width: 75%; height: 75%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="container-fluid real-content" style=" margin-bottom: -100px;">
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="../assets/images/DentalOffice.jpg" alt="" style="margin-left: 50px;  width: 75%; height: 75%;  border-radius: 5px; " class="img-rounded img-responsive center-block">
-            </div>
-            <div class="col-sm-6">
-
-                <h3 class="text-left"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                  </svg> &nbsp;Hours Of Operation</h3>
-                <div id="container-hours-operation" style="border-radius: 5px; padding:15px;  width: 300px; height: 400px;">
-                    <div class="container-day-time" id="hours-monday"><span class="day">Monday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-tuesday"><span class="day">Tuesday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-wednesday"><span class="day">Wednesday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-thursday"><span class="day">Thursday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-friday"><span class="day">Friday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-saturday"><span class="day">Saturday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                    <div class="container-day-time" id="hours-sunday"><span class="day">Sunday</span><span class="time" style="text-align: right;">9:00 AM - 5:00 PM</span></div>
-                </div>
-
-            </div>
-        </div>
     </div>
     </div>
+
+
+
 
 
 
@@ -252,17 +242,6 @@
     </footer>
     <!-- Footer -->
 
-
-    <script>
-        function myFunction() {
-            var x = document.getElementById("topnav");
-            if (x.className === "topnav") {
-                x.className += " responsive";
-            } else {
-                x.className = "topnav";
-            }
-        }
-    </script>
 
 
 </body>
