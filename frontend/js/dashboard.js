@@ -25,10 +25,26 @@ fetch(`${api_path}/appointments`, {
     })
     .then(res => res.json())
     .then(data => {
+        const deta = {...data };
         console.log(data);
-        //sorting the data
+        console.log(deta);
+
+        //console.log("start date: ", deta[0].start_date);
+        today = new Date();
+        today.setHours(0, 0, 0, 0);
+        console.log("today: \n", today);
+
+        for (let i = 0; i < data.length; i++) {
+            let appointment = new Date(deta[i].start_date);
+            appointment.setHours(0, 0, 0, 0);
+            if (today < appointment) {
+                console.log("Upcoming Appointment ", i, ": ", deta[i].start_date);
+            }
+        }
+
         let sorted = data.sort((a, b) => (new Date(a.start_date) > new Date(b.start_date) ? 1 : -1));
         console.log(sorted);
+
 
         loadAppointments(data);
     }).catch(err => {

@@ -27,7 +27,7 @@ body {
 .container .forms {
     display: flex;
     align-items: center;
-    height: 600px;
+    height: 450px;
     width: 200%;
     transition: height 0.2s ease;
 }
@@ -56,7 +56,7 @@ body {
 }
 
 .container.active .forms {
-    height: 800px;
+    height: 700px;
 }
 
 .container .form .title {
@@ -67,9 +67,9 @@ body {
 
 .form .input-field {
     position: relative;
-    height: 50px;
+    height: 45px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .input-field input {
@@ -134,7 +134,7 @@ body {
 }
 
 .form .button {
-    margin-top: 35px;
+    margin-top: 25px;
 }
 
 .form .button input {
@@ -154,12 +154,12 @@ body {
 }
 
 .form .login-signup {
-    margin-top: 30px;
+    margin-top: 25px;
     text-align: center;
 }
 
 .form .home-page {
-    margin-top: 30px;
+    margin-top: 25px;
     text-align: center;
 }
 
@@ -167,5 +167,5 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }

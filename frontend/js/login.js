@@ -12,7 +12,7 @@ fetch(`${api_path}/login`, {
             const passport = JSON.parse(window.localStorage.getItem('passport'));
             if (passport.is_admin) {
                 window.location.href = "dashboard_admin.html";
-            } else window.location.href = "dashboard_patient.html";
+            } else window.location.href = "dashboard.html";
         }
     })
     .catch(err => {
@@ -94,7 +94,7 @@ function handleLogin() {
                     window.location.href = "dashboard_admin.html";
                     return;
                 } else {
-                    window.location.href = "dashboard_patient.html";
+                    window.location.href = "dashboard.html";
                 }
 
 
