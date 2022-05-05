@@ -45,6 +45,11 @@
         .table-striped>tbody>tr:nth-child(odd)>th {
             background-color: #def4f7;
         }
+        
+        h5 {
+            margin-top: 0px;
+            margin-bottom: 25px;
+        }
     </style>
 
 
@@ -117,26 +122,41 @@
 
 
     <!--Dashboard main-->
-    <div class="col main">
+    <!--Dashboard main-->
+    <div class="main">
 
         <div class="row dash">
-            <div class="col-xs-6 col-sm-3">
-                <img src="../assets/images/DrStuart.png" width="200" height="200" class="img-responsive" alt="Profile">
-                <h4 alt="NAME">Jon Jon</h4>
-                <p alt="ADDRESS">12345 Basic Street</p>
-                <p alt="PHONE">555-444-7777</p>
-                <p alt="INSURANCE">Insurance</p>
-                <p alt="EMAIL">Jon@mail.com</p>
+            <div style="border-radius: 5px; background-color: #cdecef;" class="col-xs-6 col-sm-2">
+                <h4 style="color: #00a8f3; margin-top: 50px;" alt="NAME">Jon Jon</h4>
+                <p style="color: #00a8f3;" alt="ADDRESS">12345 Basic Street</p>
+                <p style="color: #00a8f3;" alt="PHONE">555-444-7777</p>
+                <p style="color: #00a8f3;" alt="EMAIL">Jon@mail.com</p>
             </div>
 
-            <div class="col-xs-6 col-sm-9">
-                <h5 style="text-align:left">Appointments</h5>
+            <div class="col-xs-6 col-sm-10">
+
+                <div>
+                    <h5 style="text-align:center;">Schedule Appointments</h5>
+                    <form>
+                        <label for="appointmentTime">Appointment (date and time):</label>
+                        <input type="datetime-local" id="appointmentTime" name="appointmentTime" step="3600">
+                        <select name="reason" id="reason">
+                            <option value="cleaning">Cleaning</option>
+                            <option value="consulting">Consulting</option>
+                            <option value="braces">Braces</option>
+                            <option value="pain">Pain</option>
+                        </select>
+                        <input type="button" value="Submit" onclick="scheduleAppointment()">
+                    </form>
+                </div>
+
+                <h5 style="text-align:center; margin-top: 75px;">Upcoming Appointments</h5>
 
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Appointment ID#</th>
                                 <th>Time</th>
                                 <th>Reason</th>
                                 <th>Notes</th>
@@ -157,11 +177,36 @@
                         </tbody>
                     </table>
                 </div>
+
+                <h5 style="text-align:center; margin-top: 75px;">Past Appointments</h5>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Appointment ID#</th>
+                                <th>Time</th>
+                                <th>Reason</th>
+                                <th>Notes</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments_past">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 
 
 

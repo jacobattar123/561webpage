@@ -131,6 +131,7 @@ app.delete('/appointments/:appointmentId', async(req, res) => {
                 message: `Successfully deleted appointment #${req.params.appointmentId}`
             });
         }).catch(err => {
+            console.log(err);
             res.status(400).json({ error: err });
         });
     }
@@ -150,13 +151,18 @@ app.get('/appointments', (req, res) => {
 // add new appointment
 app.post('/appointments', (req, res) => {
     // From the browser body
-    const patient_id = req.body.patient_id;
+    console.log("testing 123");
+    const passport = JSON.parse(req.headers.passport);
     const start_date = req.body.start_date;
     const end_date = req.body.end_date;
     const notes = req.body.notes;
     const reason = req.body.reason;
-
-    db.addAppointment(patient_id, start_date, end_date, notes, reason).then(data => {
+    console.log("Patient Id", passport.id);
+    console.log("start_date", start_date);
+    console.log("end_date", end_date);
+    console.log("notes", notes);
+    console.log("reason", reason);
+    db.addAppointment(passport.id, start_date, end_date, notes, reason).then(data => {
         res.json(data);
     }).catch(err => {
         res.status(401).json(err);

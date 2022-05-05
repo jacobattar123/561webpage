@@ -100,22 +100,31 @@ async function addAppointment(patientId, startDate, endDate, notes = null, reaso
         VALUES (?, ?, ?, ?, ?)
         `;
     const bookedAppointments = await new Promise((resolve, reject) => {
+        console.log("function call to bookedAppointments");
         con.query(query1, [startDate, endDate, startDate, endDate], (err, rows) => {
             if (err) {
+                console.log("Add Appointment Error:", err);
                 return reject(err);
             } else {
+                console.log("first query done");
                 return resolve(rows);
             }
         });
     }).catch(err => console.log(err));
 
     return new Promise((resolve, reject) => {
+        console.log("enter second part of function");
+        console.log("booked appointments length", bookedAppointments);
         if (bookedAppointments.length > 0) {
+            console.log("May not schedule an appoint for an unavailable time slot");
             return reject("May not schedule an appoint for an unavailable time slot");
         } else {
+            console.log("second query");
             con.query(query2, [patientId, startDate, endDate, notes, reason], (err, rows) => {
                 console.log("rows returned: ", rows);
                 if (err) {
+                    console.log("error")
+                    console.log(err);
                     return reject(err);
                 } else {
                     return resolve("Appointment Scheduled")

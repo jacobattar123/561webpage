@@ -29,30 +29,61 @@ fetch(`${api_path}/admin/appointments`, {
     .then(res => res.json())
     .then(data => {
         const deta = {...data };
-        console.log(data);
-        console.log(deta);
+        console.log("data:", data);
+        console.log("deconstructed data:", deta);
 
         //console.log("start date: ", deta[0].start_date);
         today = new Date();
-        today.setHours(0, 0, 0, 0);
+
+        today = today.toDateString();
         console.log("today: \n", today);
+        let newArray = [];
 
         for (let i = 0; i < data.length; i++) {
             let appointment = new Date(deta[i].start_date);
-            appointment.setHours(0, 0, 0, 0);
-            if (today < appointment) {
-                console.log("Upcoming Appointment ", i, ": ", deta[i].start_date);
+            appointment = appointment.toDateString();
+            console.log("appointment ", i, ": ", appointment);
+            if (today == appointment) {
+                newArray.push(deta[i]);
+                console.log("new array:", newArray);
+                console.log("appointment today ", i, ": ", deta[i].start_date);
             }
         }
 
-        let sorted = data.sort((a, b) => (new Date(a.start_date) > new Date(b.start_date) ? 1 : -1));
-        console.log(sorted);
+        let sorted = data.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
+        console.log("new array after loop:", newArray)
+        console.log(newArray);
 
 
-        loadAppointments(data);
+        loadAppointments(newArray);
     }).catch(err => {
         console.log("my error: ", err);
     });
+
+
+/* Code for checking for upcoming appointments
+    .then(data => {
+    const deta = {...data };
+    console.log(data);
+    console.log(deta);
+
+    //console.log("start date: ", deta[0].start_date);
+    today = new Date();
+    today.setHours(0, 0, 0, 0);
+    console.log("today: \n", today);
+
+    for (let i = 0; i < data.length; i++) {
+        let appointment = new Date(deta[i].start_date);
+        appointment.setHours(0, 0, 0, 0);
+        if (today < appointment) {
+            
+            console.log("Upcoming Appointment ", i, ": ", deta[i].start_date);
+        }
+    }
+*/
+
+
+
 
 
 
