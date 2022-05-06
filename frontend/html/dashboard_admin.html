@@ -45,6 +45,36 @@
         .table-striped>tbody>tr:nth-child(odd)>th {
             background-color: #def4f7;
         }
+        
+        h5 {
+            margin-top: 0px;
+            margin-bottom: 25px;
+        }
+        
+        .accordion {
+            background-color: #cdecef;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        
+        .active,
+        .accordion:hover {
+            background-color: #00a8f3;
+        }
+        
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
     </style>
 
 
@@ -120,47 +150,150 @@
     <div class="col main">
 
         <div class="row dash">
-            <div class="col-xs-6 col-sm-3">
-                <img src="../assets/images/DrStuart.png" width="200" height="200" class="img-responsive" alt="Profile">
-                <h4 alt="NAME">ADMIN</h4>
-                <p alt="ADDRESS">12345 Basic Street</p>
-                <p alt="PHONE">555-444-7777</p>
-                <p alt="INSURANCE">Insurance</p>
-                <p alt="EMAIL">Jon@mail.com</p>
+            <div style="border-radius: 5px; background-color: #cdecef;" class="col-xs-6 col-sm-2">
+                <h4 style="color: #00a8f3; margin-top: 50px;" alt="NAME">Admin</h4>
+                <p style="color: #00a8f3;" alt="ADDRESS">12345 Basic Street</p>
+                <p style="color: #00a8f3;" alt="PHONE">555-444-7777</p>
+                <p style="color: #00a8f3;" alt="EMAIL">Jon@mail.com</p>
             </div>
 
             <div class="col-xs-6 col-sm-9">
-                <h5 style="text-align:left">Appointments</h5>
 
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Time</th>
-                                <th>Reason</th>
-                                <th>Notes</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="appointments">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                <div id="patient_lookup_container">
+                    <h5 style="text-align:center;">Search For A Patient</h5>
+                    <form>
+                        <label for="appointmentTime">Patient Id:</label>
+                        <input type="text" id="txt_patient_id" name="txt_patient_id">
+
+                        <input type="button" value="Submit" onclick="patientLookup()">
+                    </form>
+
+                    <div id="patient_info_wrapper" style="display: none;">
+                        <div class="table-responsive" style="margin-top: 50px;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient FName</th>
+                                        <th>Patient LName</th>
+                                        <th>Patient Address</th>
+                                        <th>Phone Number</th>
+                                        <th>Patient Insurance Provider</th>
+                                        <th>Patient Email</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patient_selected">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
 
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="table-responsive" style="margin-top: 50px;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Appointment ID#</th>
+                                        <th>Time</th>
+                                        <th>Reason</th>
+                                        <th>Notes</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointments_selected_patient">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!-- Start Accordian Here-->
+                <button style="margin-top: 50px;" class="accordion">Today's Appointments</button>
+                <div class="panel">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Patient ID</th>
+                                    <th>Time</th>
+                                    <th>Reason</th>
+                                    <th>Notes</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointments_today">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <button class="accordion">Patients</button>
+                <div class="panel">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>Patient ID</th>
+                                    <th>Patient FName</th>
+                                    <th>Patient LName</th>
+                                    <th>Patient Address</th>
+                                    <th>Phone Number</th>
+                                    <th>Patient Insurance Provider</th>
+                                    <th>Patient Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="patients">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!--Container for info Search Patient, and the accordians-->
         </div>
-    </div>
-    </div>
     </div>
 
 
@@ -242,7 +375,22 @@
     </footer>
     <!-- Footer -->
 
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 </body>
 

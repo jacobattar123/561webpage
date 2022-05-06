@@ -20,6 +20,34 @@ fetch(`${api_path}/login`, {
 
 //fetch todays appointments
 fetch(`${api_path}/admin/appointments`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport'),
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        const deta = {...data };
+        today = new Date();
+        today = today.toDateString();
+        let newArray = [];
+        for (let i = 0; i < data.length; i++) {
+            let appointment = new Date(deta[i].start_date);
+            appointment = appointment.toDateString();
+            if (today == appointment) {
+                newArray.push(deta[i]);
+            }
+        }
+        loadAppointments(newArray);
+    }).catch(err => {
+        console.log("my error: ", err);
+    });
+
+const passport = JSON.parse(localStorage.getItem('passport'));
+
+//fetch all patients
+fetch(`${api_path}/admin/patients`, {
         headers: { // next two lines 
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -29,63 +57,18 @@ fetch(`${api_path}/admin/appointments`, {
     .then(res => res.json())
     .then(data => {
         const deta = {...data };
-        console.log("data:", data);
-        console.log("deconstructed data:", deta);
-
-        //console.log("start date: ", deta[0].start_date);
-        today = new Date();
-
-        today = today.toDateString();
-        console.log("today: \n", today);
         let newArray = [];
-
         for (let i = 0; i < data.length; i++) {
-            let appointment = new Date(deta[i].start_date);
-            appointment = appointment.toDateString();
-            console.log("appointment ", i, ": ", appointment);
-            if (today == appointment) {
-                newArray.push(deta[i]);
-                console.log("new array:", newArray);
-                console.log("appointment today ", i, ": ", deta[i].start_date);
-            }
+            let patient = deta[i];
+            newArray.push(patient);
+            console.log(newArray);
         }
-
-        let sorted = data.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
-        console.log("new array after loop:", newArray)
         console.log(newArray);
-
-
-        loadAppointments(newArray);
+        let sorted = newArray.sort((a, b) => (a.patient_lname > b.patient_lname) ? 1 : -1);
+        loadPatients(sorted);
     }).catch(err => {
         console.log("my error: ", err);
     });
-
-
-/* Code for checking for upcoming appointments
-    .then(data => {
-    const deta = {...data };
-    console.log(data);
-    console.log(deta);
-
-    //console.log("start date: ", deta[0].start_date);
-    today = new Date();
-    today.setHours(0, 0, 0, 0);
-    console.log("today: \n", today);
-
-    for (let i = 0; i < data.length; i++) {
-        let appointment = new Date(deta[i].start_date);
-        appointment.setHours(0, 0, 0, 0);
-        if (today < appointment) {
-            
-            console.log("Upcoming Appointment ", i, ": ", deta[i].start_date);
-        }
-    }
-*/
-
-
-
-
-
 
 
 /*
@@ -115,6 +98,7 @@ function loadAppointments(data) {
         "{{#data}}" +
         "<tr>" +
         "<td>Appointment Id: {{id}}</td> " +
+        "<td>{{patient_id}}</td> " +
         "<td>{{start_date}} - {{end_date}}</td> " +
         "<td>{{reason}}</td> " +
         "<td>{{notes}}</td> " +
@@ -124,12 +108,161 @@ function loadAppointments(data) {
         "</tr>" +
         "{{/data}}"
     let output = Mustache.render(template, source);
-    document.getElementById("appointments").innerHTML = output;
+    document.getElementById("appointments_today").innerHTML = output;
+}
+
+
+function patientLookupAppointments(data) {
+
+    let source = {
+        data: data.map(el => {
+            let output = {...el };
+            output.start_date = new Date(output.start_date).toLocaleString();
+            output.end_date = new Date(output.end_date).toLocaleTimeString();
+            return output;
+        })
+    };
+    let template =
+        "{{#data}}" +
+        "<tr>" +
+        "<td>{{id}}</td> " +
+        "<td>{{start_date}} - {{end_date}}</td> " +
+        "<td>{{reason}}</td> " +
+        "<td>{{notes}}</td> " +
+
+        "<td>" +
+        "</td>" +
+        "</tr>" +
+        "{{/data}}"
+    let output = Mustache.render(template, source);
+    document.getElementById("appointments_selected_patient").innerHTML = output;
+}
+
+function loadPatients(data) {
+    let source = {
+        data: data.map(el => {
+            let output = {...el };
+            return output;
+        })
+    };
+    let template =
+        "{{#data}}" +
+        "<tr>" +
+        "<td>{{id}}</td> " +
+        "<td>{{patient_fname}}</td> " +
+        "<td>{{patient_lname}}</td> " +
+        "<td>{{patient_address}}</td> " +
+        "<td>{{patient_phone_number}}</td> " +
+        "<td>{{patient_insurance_provider}}</td> " +
+        "<td>{{patient_email}}</td> " +
+        "<td>" +
+        `<input type="button" value="Delete Patient" onclick="">` +
+        "</td>" +
+        "</tr>" +
+        "{{/data}}"
+    let output = Mustache.render(template, source);
+    document.getElementById("patients").innerHTML = output;
+}
+
+function loadOnePatient(data) {
+    let source = {
+        data: data.map(el => {
+            let output = {...el };
+            return output;
+        })
+    };
+    let template =
+        "{{#data}}" +
+        "<tr>" +
+        "<td>{{id}}</td> " +
+        "<td>{{patient_fname}}</td> " +
+        "<td>{{patient_lname}}</td> " +
+        "<td>{{patient_address}}</td> " +
+        "<td>{{patient_phone_number}}</td> " +
+        "<td>{{patient_insurance_provider}}</td> " +
+        "<td>{{patient_email}}</td> " +
+        "<td>" +
+        `<input type="button" value="Delete Patient" onclick="">` +
+        "</td>" +
+        "</tr>" +
+        "{{/data}}"
+    let output = Mustache.render(template, source);
+    document.getElementById("patient_selected").innerHTML = output;
 }
 
 function cancelAppointment(id) {
-    // make call to back end to cancel appointment
+    console.log(`${api_path}/appointments/${id}`);
+    fetch(`${api_path}/appointments/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport')
+        }
+    }).then(data => {
+        location.reload();
+        alert("Appointment Has Been Cancelled.");
+    }).catch(err => {
+        alert(err);
+        console.log("my error: ", err);
+    });
 }
+
+
+function patientLookup() {
+    let patientId = document.getElementById("txt_patient_id").value;
+    console.log("getting request for patientLookup");
+
+    //get appointments
+    fetch(`${api_path}/appointments/${patientId}`, {
+        method: "GET",
+        headers: { // next two lines 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport'),
+        }
+    }).then(res => res.json()).then(data => {
+        const deta = {...data };
+        console.log("deta:", deta);
+        let newArray = [];
+        if (Object.keys(deta).length == 0) {
+            patientLookupAppointments(newArray);
+        } else {
+            for (let i = 0; i < data.length; i++) {
+                console.log(deta[i]);
+                newArray.push(deta[i]);
+                console.log(newArray);
+            }
+            patientLookupAppointments(newArray);
+        }
+    }).catch(err => {
+        console.log("Patient Appointment Lookup Error:", err);
+    })
+
+    //get patient
+    fetch(`${api_path}/admin/patient/${patientId}`, {
+        headers: { // next two lines 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport'),
+        }
+    }).then(res => res.json()).then(data => {
+        document.getElementById("patient_info_wrapper").style.display = "block";
+        const deta = {...data };
+        let newArray = [];
+        newArray.push(deta);
+        console.log("testing get patient appointment");
+        console.log("Patient Info: ", deta);
+        console.log("newArray: ", newArray);
+        document.getElementById("patient_info_wrapper").style.display = "block";
+        loadOnePatient(newArray);
+
+    }).catch(err => {
+        console.log("Patient Appointment Lookup Error:", err);
+    });
+}
+
+
 
 function logOut() {
     window.location.href = "home.html";

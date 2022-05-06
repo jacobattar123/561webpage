@@ -55,7 +55,8 @@ app.post('/login', (req, res) => {
     const password = req.body.password;
 
     if (patient_email && password) {
-        //TO DO::: pass password through hash first. then send that to check credentials
+
+
         db.checkCredentials(patient_email, password).then(data => {
             //at this point data is returned, but has old access token.
             //generate access token
@@ -137,31 +138,39 @@ app.delete('/appointments/:appointmentId', async(req, res) => {
     }
 });
 
-
-app.get('/appointments', (req, res) => {
+//get appointments for one particular patient
+app.get('/appointments/:patientId', async(req, res) => {
     const passport = JSON.parse(req.headers.passport);
-    db.getAppointmentsByUser(passport.id).then(rows => {
-        res.json(rows);
-    }).catch(err => {
-        res.status(401).json(err);
-    });
+    if (await db.isAdmin(passport.id)) {
+        db.getAppointmentsByUser(req.params.patientId).then(rows => {
+            res.json(rows);
+        }).catch(err => {
+            res.status(401).json(err);
+        });
+    } else {
+        if (passport.id == req.params.patientId) {
+            db.getAppointmentsByUser(passport.id).then(rows => {
+                res.json(rows);
+            }).catch(err => {
+                res.status(401).json(err);
+            });
+        } else {
+            res.json("User trying to access another users data");
+        }
+
+    }
 });
+
 
 
 // add new appointment
 app.post('/appointments', (req, res) => {
     // From the browser body
-    console.log("testing 123");
     const passport = JSON.parse(req.headers.passport);
     const start_date = req.body.start_date;
     const end_date = req.body.end_date;
     const notes = req.body.notes;
     const reason = req.body.reason;
-    console.log("Patient Id", passport.id);
-    console.log("start_date", start_date);
-    console.log("end_date", end_date);
-    console.log("notes", notes);
-    console.log("reason", reason);
     db.addAppointment(passport.id, start_date, end_date, notes, reason).then(data => {
         res.json(data);
     }).catch(err => {
@@ -169,6 +178,8 @@ app.post('/appointments', (req, res) => {
     });
 });
 
+
+//get all appointments
 app.get('/admin/appointments', async(req, res) => {
     const passport = JSON.parse(req.headers.passport);
     if (await db.isAdmin(passport.id)) {
@@ -182,8 +193,10 @@ app.get('/admin/appointments', async(req, res) => {
     }
 });
 
+//get all patients 
 app.get('/admin/patients', async(req, res) => {
     const passport = JSON.parse(req.headers.passport);
+    console.log(passport);
     if (await db.isAdmin(passport.id)) {
         db.getPatientsAll().then(rows => {
             res.json(rows);
@@ -195,6 +208,25 @@ app.get('/admin/patients', async(req, res) => {
     }
 });
 
+//get a particular patient
+app.get('/admin/patient/:patientId', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    console.log(passport);
+    if (await db.isAdmin(passport.id)) {
+        console.log("inside is admin check");
+        db.getPatient(req.params.patientId).then(rows => {
+            console.log("after function returns, rows:");
+            console.log(rows);
+            res.json(rows);
+        }).catch(err => {
+            res.status(401).json(err);
+        });
+    } else {
+        res.status(401).json("Not authorized");
+    }
+});
+
+//delete patient
 app.delete('/admin/patients/:patientId', async(req, res) => {
     const passport = JSON.parse(req.headers.passport);
     if (await db.isAdmin(passport.id)) {

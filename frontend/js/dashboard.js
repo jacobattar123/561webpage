@@ -1,5 +1,7 @@
 // Check if user is logged in:
 
+
+
 fetch(`${api_path}/login`, {
         method: "GET",
         headers: {
@@ -16,12 +18,16 @@ fetch(`${api_path}/login`, {
         console.log("my error: ", err);
     });
 
-fetch(`${api_path}/appointments`, {
+const passport = JSON.parse(localStorage.getItem('passport'));
+
+
+//this function displays past appointments
+fetch(`${api_path}/appointments/${passport.id}`, {
         headers: { // next two lines 
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'passport': localStorage.getItem('passport'),
-        },
+        }
     })
     .then(res => res.json())
     .then(data => {
@@ -37,18 +43,19 @@ fetch(`${api_path}/appointments`, {
                 newArray.push(deta[i]);
             }
         }
-        let sorted = data.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
+        // let sorted = data.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
         loadAppointmentsPast(newArray);
     }).catch(err => {
         console.log("my error: ", err);
     });
 
-fetch(`${api_path}/appointments`, {
+// this function displays upcoming appointments
+fetch(`${api_path}/appointments/${passport.id}`, {
         headers: { // next two lines 
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'passport': localStorage.getItem('passport'),
-        },
+        }
     })
     .then(res => res.json())
     .then(data => {
@@ -127,6 +134,7 @@ function loadAppointmentsPast(data) {
     document.getElementById("appointments_past").innerHTML = output;
 }
 
+
 function cancelAppointment(id) {
     console.log(`${api_path}/appointments/${id}`);
     fetch(`${api_path}/appointments/${id}`, {
@@ -137,6 +145,7 @@ function cancelAppointment(id) {
             'passport': localStorage.getItem('passport')
         }
     }).then(data => {
+        location.reload();
         alert("Appointment Has Been Cancelled.");
     }).catch(err => {
         alert(err);
@@ -161,6 +170,7 @@ function setPassport(id, access_token, is_admin) {
         is_admin,
     }));
 }
+
 
 function scheduleAppointment() {
     console.log("scheduleAppointment");

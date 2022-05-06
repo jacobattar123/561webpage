@@ -4,6 +4,8 @@ const e = require('express');
 const con = mysql.createConnection(config);
 const mathutil = require('./mathutil');
 
+
+//get all appointments for a particular user
 function getAppointmentsByUser(patientId) {
     console.log(patientId);
     const query1 = `
@@ -24,17 +26,23 @@ function getAppointmentsByUser(patientId) {
     });
 }
 
+
+
+//get all appointments
 function getAppointmentsAll() {
     const query = `
-        SELECT *
+        SELECT * 
         FROM appointments
     `;
     return new Promise((resolve, reject) => {
+
         con.query(query, (err, rows) => {
             if (err) {
+
                 return reject(err);
             } else {
                 if (rows && rows.length) {
+
                     return resolve(rows);
                 } else return reject(null);
             }
@@ -42,14 +50,18 @@ function getAppointmentsAll() {
     });
 }
 
+
+//get all patients
 function getPatientsAll() {
     const query = `
-        SELECT *
+        SELECT id, patient_lname, patient_fname, patient_address, patient_phone_number, patient_insurance_provider, patient_email
         FROM patients
     `;
     return new Promise((resolve, reject) => {
+        console.log("Before query to database for patients");
         con.query(query, (err, rows) => {
             if (err) {
+                console.log(err);
                 return reject(err);
             } else {
                 if (rows && rows.length) {
@@ -60,6 +72,37 @@ function getPatientsAll() {
     });
 }
 
+//get a particular patient
+function getPatient(patientId) {
+    console.log("before getPatient query");
+    const query = `
+                SELECT *
+                FROM patients 
+                WHERE id = ?
+                `;
+
+    return new Promise((resolve, reject) => {
+        console.log(query);
+        console.log(patientId);
+        con.query(query, [patientId], (err, rows) => {
+            if (err) {
+                console.log("inside getPatient error");
+                console.log(err);
+                return reject(err);
+            } else {
+                console.log("inside else");
+                console.log(rows);
+                if (rows) {
+                    console.log("logging patient info:");
+                    return resolve(rows[0]);
+                } else return reject(null);
+            }
+        })
+    })
+
+}
+
+//check login credentials
 function checkCredentials(userId, password) {
     const query = `
         SELECT * FROM patients
@@ -81,13 +124,8 @@ function checkCredentials(userId, password) {
 
 
 
-
+//add an appointment
 async function addAppointment(patientId, startDate, endDate, notes = null, reason = null) {
-    // 1. Check who is making the appointment
-    // AKA get patient_id for given patient_email
-    // 2. Check if requested time is open (SELECT)
-    // If open. add to db and send back success (INSERT)
-    // If closed. send back error.
 
     const query1 = `SELECT * 
                     FROM appointments
@@ -100,7 +138,6 @@ async function addAppointment(patientId, startDate, endDate, notes = null, reaso
         VALUES (?, ?, ?, ?, ?)
         `;
     const bookedAppointments = await new Promise((resolve, reject) => {
-        console.log("function call to bookedAppointments");
         con.query(query1, [startDate, endDate, startDate, endDate], (err, rows) => {
             if (err) {
                 console.log("Add Appointment Error:", err);
@@ -113,8 +150,6 @@ async function addAppointment(patientId, startDate, endDate, notes = null, reaso
     }).catch(err => console.log(err));
 
     return new Promise((resolve, reject) => {
-        console.log("enter second part of function");
-        console.log("booked appointments length", bookedAppointments);
         if (bookedAppointments.length > 0) {
             console.log("May not schedule an appoint for an unavailable time slot");
             return reject("May not schedule an appoint for an unavailable time slot");
@@ -134,6 +169,8 @@ async function addAppointment(patientId, startDate, endDate, notes = null, reaso
     });
 }
 
+
+//delete appointment
 function deleteAppointment(id) {
     const query = `DELETE 
                    FROM appointments 
@@ -146,6 +183,8 @@ function deleteAppointment(id) {
     });
 }
 
+
+//add a patient
 function addPatient(newPatient) {
     const {
         patient_fname,
@@ -178,6 +217,8 @@ function addPatient(newPatient) {
     });
 }
 
+
+//delete patient
 function deletePatient(id) {
     const query = `DELETE 
                    FROM patients 
@@ -190,6 +231,8 @@ function deletePatient(id) {
     });
 }
 
+
+//add token
 function addToken(id, token) {
     const query = `
         UPDATE patients
@@ -263,6 +306,7 @@ module.exports = {
     getAppointmentsByUser,
     getAppointmentsAll,
     getPatientsAll,
+    getPatient,
     checkCredentials,
     addAppointment,
     deleteAppointment,
