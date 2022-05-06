@@ -43,7 +43,7 @@ fetch(`${api_path}/appointments/${passport.id}`, {
                 newArray.push(deta[i]);
             }
         }
-        // let sorted = data.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
+        // let sorted = newArray.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
         loadAppointmentsPast(newArray);
     }).catch(err => {
         console.log("my error: ", err);

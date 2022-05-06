@@ -165,7 +165,7 @@
                         <label for="appointmentTime">Patient Id:</label>
                         <input type="text" id="txt_patient_id" name="txt_patient_id">
 
-                        <input type="button" value="Submit" onclick="patientLookup()">
+                        <input type="button" value="Submit" onclick="patientLookup(document.getElementById('txt_patient_id').value)">
                     </form>
 
                     <div id="patient_info_wrapper" style="display: none;">

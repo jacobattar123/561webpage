@@ -301,6 +301,27 @@ function verifyAppointment(patientId, appointmentId) {
     });
 }
 
+
+function addNote(note, appId) {
+    const query = `
+        UPDATE appointments
+        SET notes = ?
+        WHERE id = ? 
+    `;
+
+    return new Promise((resolve, reject) => {
+        con.query(query, [note, appId], (err, rows) => {
+            if (err) {
+                console.log("update notes error:", err);
+                return reject(err);
+            } else {
+                console.log("update notes success: ", rows);
+                return resolve(rows[0]);
+            }
+        })
+    })
+}
+
 module.exports = {
     con,
     getAppointmentsByUser,
@@ -316,4 +337,5 @@ module.exports = {
     verifyToken,
     isAdmin,
     verifyAppointment,
+    addNote
 }

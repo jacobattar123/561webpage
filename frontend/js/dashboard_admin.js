@@ -132,6 +132,9 @@ function patientLookupAppointments(data) {
 
         "<td>" +
         "</td>" +
+        `<input type="text" id="txt_note{{id}}" name="txt_note{{id}}">` +
+        `<input type="button" value="Add Note" onclick="addNote({{id}}, document.getElementById('txt_note{{id}}').value)">` +
+        "</tr>" +
         "</tr>" +
         "{{/data}}"
     let output = Mustache.render(template, source);
@@ -148,6 +151,7 @@ function loadPatients(data) {
     let template =
         "{{#data}}" +
         "<tr>" +
+        "<td>" + `<input type="button" value="Select" onclick="patientLookup({{id}})">` + "</td>" +
         "<td>{{id}}</td> " +
         "<td>{{patient_fname}}</td> " +
         "<td>{{patient_lname}}</td> " +
@@ -164,6 +168,8 @@ function loadPatients(data) {
     document.getElementById("patients").innerHTML = output;
 }
 
+
+//load single patient data
 function loadOnePatient(data) {
     let source = {
         data: data.map(el => {
@@ -184,7 +190,6 @@ function loadOnePatient(data) {
         "<td>" +
         `<input type="button" value="Delete Patient" onclick="">` +
         "</td>" +
-        "</tr>" +
         "{{/data}}"
     let output = Mustache.render(template, source);
     document.getElementById("patient_selected").innerHTML = output;
@@ -209,8 +214,8 @@ function cancelAppointment(id) {
 }
 
 
-function patientLookup() {
-    let patientId = document.getElementById("txt_patient_id").value;
+function patientLookup(patientId) {
+    //let patientId = document.getElementById("txt_patient_id").value;
     console.log("getting request for patientLookup");
 
     //get appointments
@@ -233,7 +238,8 @@ function patientLookup() {
                 newArray.push(deta[i]);
                 console.log(newArray);
             }
-            patientLookupAppointments(newArray);
+            let sorted = newArray.sort((a, b) => (new Date(a.start_date) < new Date(b.start_date) ? 1 : -1));
+            patientLookupAppointments(sorted);
         }
     }).catch(err => {
         console.log("Patient Appointment Lookup Error:", err);
@@ -262,7 +268,30 @@ function patientLookup() {
     });
 }
 
+function addNote(appId, note) {
+    console.log(note);
+    console.log(appId);
 
+    const body = {
+        'appId': appId,
+        'note': note
+    };
+
+    fetch(`${api_path}/admin/appointment/notes`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport')
+        },
+        body: JSON.stringify(body)
+    }).then(data => {
+        location.reload();
+        console.log(data);
+    }).catch(err => {
+        console.log("Add note error: ", err);
+    });
+}
 
 function logOut() {
     window.location.href = "home.html";

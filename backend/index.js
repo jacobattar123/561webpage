@@ -234,9 +234,27 @@ app.delete('/admin/patients/:patientId', async(req, res) => {
             res.json({
                 message: `Successfully deleted patient #${req.params.patientId}`
             });
+        }).catch(err => {
+            res.status(401).json(err);
         });
+    } else {
+        res.json("User is not admin, cannot delete patient.");
     }
 });
+
+app.put('/admin/appointment/notes', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
+        db.addNote(req.body.note, req.body.appId).then(data => {
+            res.json("Note added");
+        }).catch(err => {
+            res.status(401).json(err);
+        });
+    } else {
+        res.json("User is not admin, cannot add note to patient.")
+    }
+})
+
 
 app.listen(port);
 
