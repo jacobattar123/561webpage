@@ -138,6 +138,19 @@ app.delete('/appointments/:appointmentId', async(req, res) => {
     }
 });
 
+app.delete('/admin/appointments/:patientId', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    if (await db.isAdmin(passport.id)) {
+        db.deleteAllAppointment(req.params.patientId).then(data => {
+            res.json({
+                message: `Successfully deleted patient appointments #${req.params.appointmentId}`
+            });
+        });
+    } else {
+        res.json("must be admin to delete all appointments");
+    }
+});
+
 //get appointments for one particular patient
 app.get('/appointments/:patientId', async(req, res) => {
     const passport = JSON.parse(req.headers.passport);

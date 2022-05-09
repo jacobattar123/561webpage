@@ -183,6 +183,18 @@ function deleteAppointment(id) {
     });
 }
 
+function deleteAllAppointment(patientId) {
+    const query = `DELETE 
+                   FROM appointments 
+                   WHERE patient_id = ?
+                   `;
+    return new Promise((resolve, reject) => {
+        con.query(query, [patientId], (err, res) => {
+            return resolve(res);
+        });
+    });
+}
+
 
 //add a patient
 function addPatient(newPatient) {
@@ -337,5 +349,6 @@ module.exports = {
     verifyToken,
     isAdmin,
     verifyAppointment,
-    addNote
+    addNote,
+    deleteAllAppointment
 }
