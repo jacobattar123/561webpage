@@ -62,6 +62,7 @@ function handleLogin() {
     formData.forEach((val, key) => {
         body[key] = val;
     });
+    console.log(body);
     fetch(`${api_path}/login`, {
             method: "POST",
             headers: {

@@ -10,6 +10,7 @@ const mathutil = require('./mathutil');
 const cors = require('cors');
 
 
+//
 
 const whitelist = ["http://localhost:8080"];
 const corsConfig = cors({
@@ -29,11 +30,7 @@ console.log("starting backend server");
 
 const app = express();
 app.use(corsConfig);
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -53,11 +50,11 @@ app.post('/login', (req, res) => {
     // Capture the input fields
     const patient_email = req.body.email;
     const password = req.body.password;
-
+    console.log(req.body)
     if (patient_email && password) {
 
 
-        db.checkCredentials(patient_email, password).then(data => {
+        db.checkCredentials(patient_email, mathutil.generateHash(password)).then(data => {
             //at this point data is returned, but has old access token.
             //generate access token
             const token = mathutil.generateToken();
@@ -75,8 +72,9 @@ app.post('/login', (req, res) => {
     }
 });
 
-//?
+//
 app.get('/login', (req, res) => {
+    console.log(req.originalUrl)
     const passport = JSON.parse(req.headers.passport);
     if (!passport) {
         res.status(400).json("Not authenticated.");
@@ -84,7 +82,7 @@ app.get('/login', (req, res) => {
     }
     db.verifyToken(passport.id, passport.access_token).then(data => {
         res.json("Already logged in.");
-    }).catch(err => res.json("Not authenticated."))
+    }).catch(err => res.status(400).json("Not authenticated."))
 });
 
 
@@ -112,7 +110,7 @@ app.all('*', (req, res, next) => {
     }
     db.verifyToken(passport.id, passport.access_token).then(data => {
         next();
-    }).catch(err => res.json("Not authenticated."))
+    }).catch(err => res.json("Not authenticated."));
 });
 
 

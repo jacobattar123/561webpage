@@ -7,7 +7,7 @@ fetch(`${api_path}/login`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'passport': localStorage.getItem('passport')
+            'passport': localStorage.getItem('passport') || ""
         },
     }).then(res => {
         if (!res.ok) {
@@ -169,38 +169,6 @@ function loadPatients(data) {
 }
 
 
-function deletePatient(id) {
-    fetch(`${api_path}/admin/patients/${id}`, {
-        method: "DELETE",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'passport': localStorage.getItem('passport')
-        }
-    }).then(data => {
-        alert("Patient Has Been Cancelled.");
-    }).catch(err => {
-        alert(err);
-        console.log("my error: ", err);
-    });
-
-    console.log("start delete appointments all fetch.");
-    fetch(`${api_path}/admin/appointments/${id}`, {
-        method: "DELETE",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'passport': localStorage.getItem('passport')
-        }
-    }).then(data => {
-        location.reload();
-        alert("Patient appointments Has Been Cancelled.");
-    }).catch(err => {
-        alert(err);
-        console.log("my error: ", err);
-    });
-
-}
 
 //load single patient data
 function loadOnePatient(data) {
@@ -326,14 +294,49 @@ function addNote(appId, note) {
     });
 }
 
+
+function deletePatient(id) {
+    fetch(`${api_path}/admin/patients/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport')
+        }
+    }).then(data => {
+        alert("Patient Has Been Cancelled.");
+    }).catch(err => {
+        alert(err);
+        console.log("my error: ", err);
+    });
+
+    console.log("start delete appointments all fetch.");
+    fetch(`${api_path}/admin/appointments/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport')
+        }
+    }).then(data => {
+        location.reload();
+        alert("Patient appointments Has Been Cancelled.");
+    }).catch(err => {
+        alert(err);
+        console.log("my error: ", err);
+    });
+
+}
+
+
 function logOut() {
     window.location.href = "home.html";
-    localStorage.setItem('passport', {
+    localStorage.setItem('passport', JSON.stringify({
         id: "NULL",
         access_token: "NULL",
         is_admin: "NULL"
 
-    });
+    }));
 }
 
 function setPassport(id, access_token, is_admin) {

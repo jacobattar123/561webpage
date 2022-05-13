@@ -59,8 +59,7 @@ fetch(`${api_path}/appointments/${passport.id}`, {
     })
     .then(res => res.json())
     .then(data => {
-        const deta = {...data };
-
+        const deta = [...data];
         //console.log("start date: ", deta[0].start_date);
         today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -155,12 +154,11 @@ function cancelAppointment(id) {
 
 function logOut() {
     window.location.href = "home.html";
-    localStorage.setItem('passport', {
+    localStorage.setItem('passport', JSON.stringify({
         id: "NULL",
         access_token: "NULL",
         is_admin: "NULL"
-
-    });
+    }));
 }
 
 function setPassport(id, access_token, is_admin) {
