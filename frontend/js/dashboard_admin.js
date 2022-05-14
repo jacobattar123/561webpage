@@ -188,9 +188,7 @@ function loadOnePatient(data) {
         "<td>{{patient_phone_number}}</td> " +
         "<td>{{patient_insurance_provider}}</td> " +
         "<td>{{patient_email}}</td> " +
-        "<td>" +
-        `<input type="button" value="Delete Patient" onclick="">` +
-        "</td>" +
+        
         "{{/data}}"
     let output = Mustache.render(template, source);
     document.getElementById("patient_selected").innerHTML = output;
@@ -304,7 +302,7 @@ function deletePatient(id) {
             'passport': localStorage.getItem('passport')
         }
     }).then(data => {
-        alert("Patient Has Been Cancelled.");
+        alert("Patient Deleted And Their Appointments Removed.");
     }).catch(err => {
         alert(err);
         console.log("my error: ", err);
@@ -320,7 +318,6 @@ function deletePatient(id) {
         }
     }).then(data => {
         location.reload();
-        alert("Patient appointments Has Been Cancelled.");
     }).catch(err => {
         alert(err);
         console.log("my error: ", err);

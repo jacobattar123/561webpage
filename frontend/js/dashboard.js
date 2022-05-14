@@ -82,6 +82,33 @@ fetch(`${api_path}/appointments/${passport.id}`, {
 
 
 
+//display the user info on the left part of the page when they log in
+    fetch(`${api_path}/patients/patient/${passport.id}`, {
+        headers: { // next two lines 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'passport': localStorage.getItem('passport'),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        console.log(data.patient_lname);
+        document.getElementById("w_name").innerHTML = data.patient_fname;
+        document.getElementById("w_email").innerHTML = data.patient_email;
+        document.getElementById("w_phone").innerHTML = data.patient_phone_number;
+        document.getElementById("w_address").innerHTML = data.patient_address;
+
+    }).catch(err => {
+        console.log("my error: ", err);
+    });
+
+
+
+
+
+
+
 function loadAppointmentsUpcoming(data) {
     let source = {
         data: data.map(el => {

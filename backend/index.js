@@ -10,8 +10,9 @@ const mathutil = require('./mathutil');
 const cors = require('cors');
 
 
-//
 
+//Configuring CORS w/ Dynamic Origin
+//First thing in the index file is that i check 
 const whitelist = ["http://localhost:8080"];
 const corsConfig = cors({
     origin: (origin, callback) => {
@@ -234,6 +235,21 @@ app.get('/admin/patient/:patientId', async(req, res) => {
         });
     } else {
         res.status(401).json("Not authorized");
+    }
+});
+
+//get patient info displaying on login
+app.get('/patients/patient/:patientId', async(req, res) => {
+    const passport = JSON.parse(req.headers.passport);
+    console.log(passport);
+    if (passport.id == req.params.patientId) {
+        db.getPatientInfo(passport.id).then(rows => {
+            res.json(rows);
+        }).catch(err => {
+            res.status(401).json(err);
+        });
+    } else {
+        res.json("User trying to access another users data");
     }
 });
 

@@ -313,6 +313,27 @@ function verifyAppointment(patientId, appointmentId) {
     });
 }
 
+function getPatientInfo(id){
+    const query = `
+    SELECT patient_lname, patient_fname, patient_address, patient_phone_number, patient_insurance_provider, patient_email
+    FROM patients
+    WHERE id = ?
+`;
+    return new Promise((resolve, reject) => {
+        console.log("get user info from db");
+        con.query(query, [id], (err, rows) => {
+            if (err) {
+                console.log(err);
+                return reject(err);
+            } else {
+                if (rows && rows.length){
+                    console.log(rows[0]);
+                    return resolve(rows[0]);
+                } else return reject(null);
+            }
+        })
+    })
+}
 
 function addNote(note, appId) {
     const query = `
@@ -350,5 +371,6 @@ module.exports = {
     isAdmin,
     verifyAppointment,
     addNote,
-    deleteAllAppointment
+    deleteAllAppointment,
+    getPatientInfo
 }
